@@ -1,0 +1,18 @@
+---
+/**
+ * Badge — small mono caption pill for technical eyebrows ("100% client-side.")
+ * Uses canvas-soft surface and body text, full-radius shape.
+ */
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<span
+  class={`inline-flex items-center h-6 px-xs rounded-full bg-canvas-soft text-body text-caption font-mono ${className}`}
+>
+  <slot />
+</span>

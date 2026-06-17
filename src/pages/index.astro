@@ -1,0 +1,492 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MeshGradient from '../components/MeshGradient.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import PolarSection from '../components/PolarSection.astro';
+---
+
+<Layout>
+  <!-- ─── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="relative overflow-hidden bg-canvas">
+    <!-- Mesh gradient — hidden on mobile (< 600px) per design system rule -->
+    <div class="absolute inset-0 -z-10 hidden sm:block opacity-90">
+      <MeshGradient />
+    </div>
+    <!-- Soft fade to canvas-soft at the bottom for band transition -->
+    <div
+      class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-canvas-soft pointer-events-none -z-10"
+    ></div>
+
+    <div class="max-w-[1100px] mx-auto px-md sm:px-lg pt-6xl pb-5xl text-center">
+      <div class="flex justify-center mb-lg">
+        <Badge>100% client-side · No signup</Badge>
+      </div>
+
+      <h1
+        class="text-display-xl sm:text-display-xl max-w-[920px] mx-auto text-ink"
+      >
+        Turn any PDF into a quiz. Free.
+      </h1>
+
+      <p class="mt-lg max-w-[640px] mx-auto text-body-lg text-body">
+        Drop a PDF, pick a difficulty, and get 50+ multiple-choice questions in seconds. Download as PDF. No upload, no account, no tracking.
+      </p>
+
+      <div class="mt-2xl flex flex-col sm:flex-row items-center justify-center gap-sm">
+        <Button href="/app" variant="primary">Start for free</Button>
+        <Button href="#how-it-works" variant="secondary">See how it works</Button>
+      </div>
+
+      <p class="mt-xl text-caption font-mono text-mute">
+        No file leaves your browser. We mean it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── TRUST STRIP (mono caption, not a "wall of love") ─────────────── -->
+  <section class="bg-canvas-soft border-y border-hairline">
+    <div class="max-w-[1400px] mx-auto px-md sm:px-lg py-xl">
+      <ul class="flex flex-wrap items-center justify-center gap-x-2xl gap-y-md text-caption font-mono text-mute">
+        <li>.PDF</li>
+        <li aria-hidden="true">·</li>
+        <li>compromise NLP</li>
+        <li aria-hidden="true">·</li>
+        <li>Tailwind v4</li>
+        <li aria-hidden="true">·</li>
+        <li>Astro 6</li>
+        <li aria-hidden="true">·</li>
+        <li>Zero backend</li>
+        <li aria-hidden="true">·</li>
+        <li>Zero tracking</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES (3-up cluster) ──────────────────────────────────────── -->
+  <PolarSection id="features" polarity="light" paddingY="xl">
+    <div class="max-w-[1400px] mx-auto px-md sm:px-lg">
+      <div class="max-w-[720px] mb-4xl">
+        <p class="font-mono text-caption uppercase tracking-wide text-mute mb-sm">
+          Features
+        </p>
+        <h2 class="text-display-lg text-ink">
+          Everything you need to study smarter.
+        </h2>
+        <p class="mt-md text-body-md text-body max-w-[640px]">
+          A focused tool that does one thing well — turning study material into questions you can actually practice with.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <!-- Card 1 -->
+        <article class="bg-canvas rounded-md p-lg shadow-level-3 border border-hairline">
+          <div class="w-10 h-10 rounded-md bg-canvas-soft-2 flex items-center justify-center mb-md">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M9 9h6M9 13h6M9 17h4"/>
+            </svg>
+          </div>
+          <h3 class="text-display-sm text-ink">50+ questions, every time</h3>
+          <p class="mt-sm text-body-md text-body">
+            Key-term extraction and cloze deletion run on your PDF locally to produce at least 50 unique multiple-choice questions.
+          </p>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="bg-canvas rounded-md p-lg shadow-level-3 border border-hairline">
+          <div class="w-10 h-10 rounded-md bg-canvas-soft-2 flex items-center justify-center mb-md">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
+              <path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 class="text-display-sm text-ink">100% private, by design</h3>
+          <p class="mt-sm text-body-md text-body">
+            Your PDF is parsed and processed entirely in your browser. It is never uploaded to a server. Close the tab and it is gone.
+          </p>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="bg-canvas rounded-md p-lg shadow-level-3 border border-hairline">
+          <div class="w-10 h-10 rounded-md bg-canvas-soft-2 flex items-center justify-center mb-md">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
+              <path d="M12 3v18M3 12h18"/>
+            </svg>
+          </div>
+          <h3 class="text-display-sm text-ink">Three difficulty levels</h3>
+          <p class="mt-sm text-body-md text-body">
+            Easy masks the most obvious terms, Medium uses balanced cloze rules, Hard targets rare acronyms and multi-word phrases.
+          </p>
+        </article>
+      </div>
+    </div>
+  </PolarSection>
+
+  <!-- ─── DARK SHOWCASE BAND (polarity flip) ────────────────────────────── -->
+  <PolarSection id="how-it-works" polarity="dark" paddingY="xl">
+    <div class="max-w-[1400px] mx-auto px-md sm:px-lg">
+      <div class="max-w-[720px] mb-4xl">
+        <p class="font-mono text-caption uppercase tracking-wide text-on-primary/70 mb-sm">
+          How it works
+        </p>
+        <h2 class="text-display-lg text-on-primary">
+          Three steps. About ten seconds.
+        </h2>
+      </div>
+
+      <ol class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <li class="bg-ink rounded-md p-lg border border-on-primary/10">
+          <p class="font-mono text-caption text-cyan dark:text-cyan-deep mb-md">STEP_01</p>
+          <h3 class="text-display-sm text-on-primary">Drop a PDF</h3>
+          <p class="mt-sm text-body-md text-on-primary/70">
+            Drag the file onto the page or click to pick one. We use .PDF to extract the text entirely in your browser.
+          </p>
+        </li>
+        <li class="bg-ink rounded-md p-lg border border-on-primary/10">
+          <p class="font-mono text-caption text-cyan dark:text-cyan-deep mb-md">STEP_02</p>
+          <h3 class="text-display-sm text-on-primary">Pick a difficulty</h3>
+          <p class="mt-sm text-body-md text-on-primary/70">
+            Choose Easy, Medium, or Hard. Set how many questions you want — anywhere from 5 to 100.
+          </p>
+        </li>
+        <li class="bg-ink rounded-md p-lg border border-on-primary/10">
+          <p class="font-mono text-caption text-cyan dark:text-cyan-deep mb-md">STEP_03</p>
+          <h3 class="text-display-sm text-on-primary">Download your quiz</h3>
+          <p class="mt-sm text-body-md text-on-primary/70">
+            Export as PDF for easy printing, sharing, and studying offline.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </PolarSection>
+
+  <!-- ─── COMPARISON (no wall of love; just clarity) ───────────────────── -->
+  <PolarSection polarity="light" paddingY="xl">
+    <div class="max-w-[1100px] mx-auto px-md sm:px-lg">
+      <div class="max-w-[720px] mb-4xl">
+        <p class="font-mono text-caption uppercase tracking-wide text-mute mb-sm">
+          Why this, not that
+        </p>
+        <h2 class="text-display-lg text-ink">Free. Forever.</h2>
+        <p class="mt-md text-body-md text-body">
+          Other quiz tools charge per document or gate features behind a subscription. We do not.
+        </p>
+      </div>
+
+      <div class="bg-canvas rounded-lg border border-hairline shadow-level-4 overflow-hidden">
+        <table class="w-full text-body-md">
+          <thead class="bg-canvas-soft">
+            <tr class="text-left">
+              <th class="font-mono text-caption uppercase tracking-wide text-mute p-md">Feature</th>
+              <th class="font-mono text-caption uppercase tracking-wide text-mute p-md">Free PDF to Quiz</th>
+              <th class="font-mono text-caption uppercase tracking-wide text-mute p-md">Paid tools</th>
+            </tr>
+          </thead>
+          <tbody class="text-ink">
+            <tr class="border-t border-hairline">
+              <td class="p-md text-body">Unlimited PDFs</td>
+              <td class="p-md text-body"><span class="text-cyan-deep font-mono">+</span> Yes</td>
+              <td class="p-md text-body text-body">Tiered, often capped</td>
+            </tr>
+            <tr class="border-t border-hairline">
+              <td class="p-md text-body">No account needed</td>
+              <td class="p-md text-body"><span class="text-cyan-deep font-mono">+</span> Yes</td>
+              <td class="p-md text-body text-body">Required</td>
+            </tr>
+            <tr class="border-t border-hairline">
+              <td class="p-md text-body">File never leaves your device</td>
+              <td class="p-md text-body"><span class="text-cyan-deep font-mono">+</span> Yes</td>
+              <td class="p-md text-body text-body">Uploaded to a server</td>
+            </tr>
+            <tr class="border-t border-hairline">
+              <td class="p-md text-body">Difficulty levels</td>
+              <td class="p-md text-body"><span class="text-cyan-deep font-mono">+</span> Easy / Medium / Hard</td>
+              <td class="p-md text-body text-body">Sometimes</td>
+            </tr>
+            <tr class="border-t border-hairline">
+              <td class="p-md text-body">PDF export</td>
+              <td class="p-md text-body"><span class="text-cyan-deep font-mono">+</span> Yes</td>
+              <td class="p-md text-body text-body">Often paywalled</td>
+            </tr>
+            <tr class="border-t border-hairline">
+              <td class="p-md text-body">Price</td>
+              <td class="p-md text-body"><span class="text-cyan-deep font-mono">+</span> Free</td>
+              <td class="p-md text-body text-body">$5 – $30 / month</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </PolarSection>
+
+  <!-- ─── SEO CONTENT ─────────────────────────────────────────────────── -->
+  <PolarSection id="about-pdf-to-quiz" polarity="light" paddingY="xl">
+    <div class="max-w-[820px] mx-auto px-md sm:px-lg">
+      <h2 class="text-display-lg text-ink mb-lg">Convert PDF to Quiz — The Free PDF to Quiz Generator You Need</h2>
+
+      <div class="space-y-md text-body-md text-body leading-relaxed">
+        <p>
+          Looking for a reliable <strong>PDF to quiz</strong> tool that actually works without costing you a penny? You have found it. Our <strong>free PDF to quiz generator</strong> turns any document into multiple-choice questions in seconds, entirely inside your browser. Whether you are a student preparing for exams, a teacher creating assessments, or a professional studying for certifications, this <strong>PDF to quiz converter</strong> is built for you.
+        </p>
+
+        <p>
+          Unlike other tools that claim to be a <strong>PDF to quiz maker</strong> but then charge per document or require an account, our <strong>PDF to quiz free</strong> approach puts you first. There is no catch. Every feature is available without spending a dime. Upload a PDF, choose your difficulty, and let the <strong>free PDF to quiz generator</strong> do the heavy lifting. The result? A fully formatted quiz with 50 or more questions, complete with answer options and explanations.
+        </p>
+
+        <h3 class="text-display-sm text-ink mt-xl">Why Choose Our PDF to Quiz Generator?</h3>
+
+        <p>
+          There are plenty of options when you search for <strong>free PDF to quiz generator</strong>, but most fall short in key areas. Some require file uploads to a server, compromising your privacy. Others limit the number of questions or hide the best features behind a paywall. Our <strong>PDF to quiz generator free</strong> tool has none of these limitations. It processes everything locally using PDF.js and advanced NLP, so your document never leaves your device. This is the <strong>PDF to quiz AI</strong> approach done right — using smart algorithms instead of sending your data to external servers.
+        </p>
+
+        <p>
+          When you <strong>convert PDF to quiz online</strong>, you expect speed, accuracy, and privacy. We deliver all three. The <strong>PDF to quiz converter</strong> engine uses a rules-based pipeline that extracts key terms, scores them with TF-IDF, and generates cloze-deletion style questions. It works like a <strong>magicform PDF to quiz</strong> — drop a file, configure your preferences, and get a polished quiz ready for practice or export.
+        </p>
+
+        <h3 class="text-display-sm text-ink mt-xl">How the PDF to Quiz Converter Works</h3>
+
+        <p>
+          The process is straightforward. First, upload any PDF with selectable text. The <strong>PDF to quiz generator</strong> parses every page, extracting sentences and identifying important terms. Then it scores each term based on frequency, position, and relevance across the document. For each sentence, the <strong>PDF to quiz maker</strong> selects the best term to mask and generates three plausible distractors drawn from the same source material. This ensures every question is grounded in the actual content of your PDF.
+        </p>
+
+        <p>
+          With three difficulty levels — Easy, Medium, and Hard — you can fine-tune the experience. Easy mode masks obvious, high-frequency terms. Medium offers a balanced challenge. Hard mode targets rare acronyms, proper nouns, and multi-word phrases. This makes our <strong>PDF to quiz free</strong> tool suitable for learners at every level, from middle school to graduate studies.
+        </p>
+
+        <h3 class="text-display-sm text-ink mt-xl">Free PDF to Quiz Generator — No Limits</h3>
+
+        <p>
+          Many so-called <strong>free PDF to quiz generator</strong> tools impose strict limits: five questions per document, ten documents per month, or watermarked exports. Not this one. Our <strong>PDF to quiz converter</strong> gives you unlimited PDFs, unlimited questions (up to 100 per quiz), and clean exports in PDF or Markdown format. There is no account registration, no email collection, and no tracking scripts. Just a pure, private <strong>PDF to quiz</strong> experience.
+        </p>
+
+        <p>
+          Whether you need a <strong>PDF to quiz maker</strong> for your own study materials or for classroom use, this tool scales with your needs. Teachers can upload textbooks, lecture notes, or research papers and instantly generate practice quizzes. Students can convert their study guides into active recall exercises — one of the most effective learning techniques known to cognitive science. With our <strong>PDF to quiz generator</strong>, studying becomes an interactive process rather than passive reading.
+        </p>
+
+        <h3 class="text-display-sm text-ink mt-xl">PDF to Quiz AI — Smart, Not Just Automated</h3>
+
+        <p>
+          You might wonder if this is truly a <strong>PDF to quiz AI</strong> tool. The answer is yes, in the most practical sense. Instead of relying on expensive and slow large language models that require server-side processing, our <strong>PDF to quiz generator free</strong> uses a combination of natural language processing (via the compromise library) and TF-IDF scoring to identify the most valuable terms in your document. This approach is faster, more predictable, and fully private. It runs on your device, not on a remote server.
+        </p>
+
+        <p>
+          When you <strong>convert PDF to quiz online</strong> with us, the entire pipeline — text extraction, term scoring, cloze generation, and distractor selection — executes in your browser. This is what sets us apart from every other <strong>PDF to quiz</strong> tool on the market. You get the convenience of an online service with the privacy guarantees of a desktop application. Close the tab when you are done, and every trace of your document disappears.
+        </p>
+
+        <p>
+          Ready to try the best <strong>PDF to quiz maker</strong> available? Drop a PDF on the next page, pick your settings, and see for yourself why thousands of students and educators choose our <strong>free PDF to quiz generator</strong> for their study and teaching needs. No signup, no uploads, no nonsense. Just a fast, private <strong>PDF to quiz converter</strong> that works exactly as promised.
+        </p>
+      </div>
+    </div>
+  </PolarSection>
+
+  <!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
+  <PolarSection id="faq" polarity="canvas" paddingY="xl">
+    <div class="max-w-[820px] mx-auto px-md sm:px-lg">
+      <div class="mb-4xl">
+        <p class="font-mono text-caption uppercase tracking-wide text-mute mb-sm">
+          FAQ
+        </p>
+        <h2 class="text-display-lg text-ink">Frequently asked questions about PDF to quiz.</h2>
+      </div>
+
+      <div class="divide-y divide-hairline border-y border-hairline" itemscope itemtype="https://schema.org/FAQPage">
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">Is it really free? What's the catch?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              No catch. The whole tool runs in your browser, so we have no server costs to pass on. No account, no email, no credit card, no "free trial." This is a 100% free PDF to quiz generator.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">Does my PDF get uploaded somewhere?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              No. The PDF to quiz converter parses the file in your browser tab. We never see it, store it, or transmit it. Close the tab and the file is gone. Your privacy is guaranteed.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">Can I use it on my phone?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              Yes. The free PDF to quiz generator works on any device with a modern browser — desktop, tablet, or phone. The interface is fully responsive and adapts to smaller screens. Upload a PDF from your phone and generate a quiz on the go.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">Is this an online tool?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              It is an online tool in the sense that it runs in your browser, but no data is sent to any server. When you convert PDF to quiz online with us, everything happens locally on your device. The page loads once, and all processing stays client-side. No uploads, no backend, no tracking.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">How does it generate questions without an AI?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              Our PDF to quiz AI approach uses a rules-based pipeline: extract text with PDF.js, score key terms with TF-IDF across paragraphs, mask the highest-value term in each sentence (cloze deletion), and build three plausible distractors from the same document. It is fast, predictable, and runs entirely on your device without calling any external API.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">What about scanned PDFs or image-only documents?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              v1 does not include OCR. If we cannot extract any text from your PDF, the PDF to quiz maker will tell you immediately and suggest you run it through a free OCR tool first before using the converter.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">What file types are supported?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              Currently PDFs with selectable text. DOCX and Markdown input are on the roadmap for future versions of this free PDF to quiz generator.
+            </div>
+          </div>
+        </details>
+
+        <details class="group py-lg" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="flex items-center justify-between gap-md cursor-pointer list-none">
+            <span class="text-body-md-strong text-ink" itemprop="name">Can I edit the questions after they're generated?</span>
+            <span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-md text-body-md text-body max-w-[680px]" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">
+              Not in v1 — but the source sentence is shown next to every question, so you can find and edit it in the exported file. An in-app editor is on the roadmap for the PDF to quiz maker.
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </PolarSection>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it really free? What's the catch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No catch. The whole tool runs in your browser, so we have no server costs to pass on. No account, no email, no credit card, no free trial. This is a 100% free PDF to quiz generator."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does my PDF get uploaded somewhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The PDF to quiz converter parses the file in your browser tab. We never see it, store it, or transmit it. Close the tab and the file is gone. Your privacy is guaranteed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use it on my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The free PDF to quiz generator works on any device with a modern browser — desktop, tablet, or phone. The interface is fully responsive and adapts to smaller screens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this an online tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is an online tool in the sense that it runs in your browser, but no data is sent to any server. When you convert PDF to quiz online with us, everything happens locally on your device. No uploads, no backend, no tracking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does it generate questions without an AI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our PDF to quiz AI approach uses a rules-based pipeline: extract text with PDF.js, score key terms with TF-IDF across paragraphs, mask the highest-value term in each sentence (cloze deletion), and build three plausible distractors from the same document."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about scanned PDFs or image-only documents?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "v1 does not include OCR. If we cannot extract any text from your PDF, the PDF to quiz maker will tell you immediately and suggest you run it through a free OCR tool first."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file types are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Currently PDFs with selectable text. DOCX and Markdown input are on the roadmap for future versions of this free PDF to quiz generator."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I edit the questions after they are generated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not in v1 — but the source sentence is shown next to every question, so you can find and edit it in the exported file. An in-app editor is on the roadmap."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <!-- ─── FINAL CTA ────────────────────────────────────────────────────── -->
+  <section class="bg-canvas-soft">
+    <div class="max-w-[820px] mx-auto px-md sm:px-lg py-5xl text-center">
+      <h2 class="text-display-lg text-ink">Make a quiz in the next ten seconds.</h2>
+      <p class="mt-md text-body-lg text-body max-w-[600px] mx-auto">
+        Pick a PDF, click start. That is the whole flow.
+      </p>
+      <div class="mt-2xl flex flex-col sm:flex-row items-center justify-center gap-sm">
+        <Button href="/app" variant="primary">Start for free</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── QUICK LINKS ──────────────────────────────────────────────────── -->
+  <section class="border-t border-hairline bg-canvas">
+    <div class="max-w-[820px] mx-auto px-md sm:px-lg py-xl flex flex-wrap items-center justify-center gap-x-lg gap-y-sm text-body-sm text-mute">
+      <a href="/about" class="hover:text-ink transition-colors">About</a>
+      <span aria-hidden="true">·</span>
+      <a href="/contact" class="hover:text-ink transition-colors">Contact</a>
+      <span aria-hidden="true">·</span>
+      <a href="/privacy" class="hover:text-ink transition-colors">Privacy Policy</a>
+      <span aria-hidden="true">·</span>
+      <a href="/terms" class="hover:text-ink transition-colors">Terms of Service</a>
+    </div>
+  </section>
+</Layout>

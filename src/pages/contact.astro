@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact — Free PDF to Quiz">
+  <div class="max-w-[820px] mx-auto px-md sm:px-lg py-3xl min-h-[70vh]">
+    <div class="text-center mb-2xl">
+      <h1 class="text-display-lg text-ink">Get in touch</h1>
+      <p class="mt-md text-body-md text-body">Have a question or feedback? Reach out anytime.</p>
+    </div>
+
+    <div class="bg-canvas rounded-lg p-lg shadow-level-4 border border-hairline">
+      <!-- Email -->
+      <div class="pb-lg mb-lg border-b border-hairline">
+        <p class="text-caption font-mono uppercase tracking-wide text-mute mb-sm">Email</p>
+        <a href="mailto:zunnoorainqureshi@gmail.com" class="text-body-md text-link hover:text-link-deep transition-colors break-all">
+          zunnoorainqureshi@gmail.com
+        </a>
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label for="message" class="text-caption font-mono uppercase tracking-wide text-mute mb-sm block">Message</label>
+        <textarea
+          id="message"
+          rows="5"
+          placeholder="Write your message here..."
+          class="w-full rounded-md border border-hairline bg-canvas text-body-md text-ink p-sm focus:outline-none focus:border-ink transition-colors resize-y"
+        ></textarea>
+        <a
+          href="mailto:zunnoorainqureshi@gmail.com"
+          class="mt-md inline-flex items-center gap-xs h-12 px-lg rounded-pill bg-ink text-on-primary font-medium hover:opacity-90 transition-opacity"
+        >
+          Send message
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

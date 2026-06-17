@@ -1,0 +1,77 @@
+---
+/**
+ * Footer — 4-column nav with mono caption column labels, copyright line.
+ * Pure canvas surface, hairline top border.
+ */
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    label: 'Product',
+    links: [
+      { href: '/app', label: 'Generator' },
+      { href: '#features', label: 'Features' },
+      { href: '#how-it-works', label: 'How it works' },
+      { href: '#faq', label: 'FAQ' },
+    ],
+  },
+  {
+    label: 'Use cases',
+    links: [
+      { href: '/app', label: 'For students' },
+      { href: '/app', label: 'For teachers' },
+      { href: '/app', label: 'For self-study' },
+      { href: '/app', label: 'For exam prep' },
+    ],
+  },
+  {
+    label: 'Resources',
+    links: [
+      { href: '#how-it-works', label: 'How it works' },
+      { href: '/privacy', label: 'Privacy' },
+      { href: '/terms', label: 'Terms' },
+      { href: '/changelog', label: 'Changelog' },
+    ],
+  },
+  {
+    label: 'Company',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/contact', label: 'Contact' },
+      { href: 'https://github.com/ZunnoorainQureshi', label: 'GitHub' },
+      { href: 'https://twitter.com', label: 'Twitter' },
+    ],
+  },
+];
+---
+
+<footer class="bg-canvas border-t border-hairline">
+  <div class="max-w-[1400px] mx-auto px-md sm:px-lg py-4xl">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-xl">
+      {columns.map((col) => (
+        <div>
+          <p class="text-caption font-mono uppercase tracking-wide text-mute mb-md">
+            {col.label}
+          </p>
+          <ul class="space-y-xs text-body-sm text-body">
+            {col.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="hover:text-ink transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-4xl pt-xl border-t border-hairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-md text-caption text-mute">
+      <p>© {year} Free PDF to Quiz. Built for students and teachers everywhere.</p>
+      <p class="font-mono">100% client-side · No account · No tracking</p>
+    </div>
+  </div>
+</footer>

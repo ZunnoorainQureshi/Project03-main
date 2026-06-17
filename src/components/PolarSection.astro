@@ -1,0 +1,34 @@
+---
+/**
+ * PolarSection — utility wrapper for swapping background polarity.
+ * Pass `polarity="dark"` to flip the surface from canvas-soft to ink
+ * (DESIGN.md showcase-band-dark). Use for emphasis between sections.
+ */
+
+interface Props {
+  polarity?: 'light' | 'dark' | 'canvas';
+  paddingY?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  id?: string;
+  class?: string;
+}
+
+const { polarity = 'light', paddingY = 'xl', id, class: className = '' } = Astro.props;
+
+const surface = {
+  light:  'bg-canvas-soft text-ink',
+  canvas: 'bg-canvas text-ink',
+  dark:   'bg-ink text-on-primary',
+}[polarity];
+
+const py = {
+  sm:  'py-3xl',
+  md:  'py-4xl',
+  lg:  'py-5xl',
+  xl:  'py-5xl',
+  '2xl': 'py-section',
+}[paddingY];
+---
+
+<section id={id} class={`${surface} ${py} ${className}`}>
+  <slot />
+</section>

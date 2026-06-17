@@ -1,0 +1,56 @@
+---
+/**
+ * Button — primary / secondary / primary-sm / secondary-sm variants.
+ * Marketing-scale CTAs use rounded-pill (100px); nav-scale CTAs use rounded-sm (6px).
+ * All four variants follow DESIGN.md exactly.
+ */
+
+type Variant = 'primary' | 'secondary' | 'primary-sm' | 'secondary-sm';
+
+interface Props {
+  href?: string;
+  variant?: Variant;
+  type?: 'button' | 'submit' | 'reset';
+  id?: string;
+  ariaLabel?: string;
+  class?: string;
+  disabled?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  type = 'button',
+  id,
+  ariaLabel,
+  class: className = '',
+  disabled = false,
+} = Astro.props;
+
+const size = variant.endsWith('-sm') ? 'sm' : 'md';
+const tone = variant.startsWith('primary') ? 'primary' : 'secondary';
+
+const baseBySize = {
+  sm: 'inline-flex items-center h-7 px-xs text-button-md rounded-sm',
+  md: 'inline-flex items-center h-12 px-md text-button-lg rounded-pill',
+}[size];
+
+const toneByKind = {
+  primary:   'bg-ink text-on-primary hover:opacity-90',
+  secondary: 'bg-canvas text-ink border border-hairline hover:bg-canvas-soft-2',
+}[tone];
+
+const classes = [baseBySize, toneByKind, disabled ? 'opacity-50 pointer-events-none' : '', className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{href ? (
+  <a href={href} id={id} class={classes} aria-label={ariaLabel} aria-disabled={disabled}>
+    <slot />
+  </a>
+) : (
+  <button type={type} id={id} class={classes} aria-label={ariaLabel} disabled={disabled}>
+    <slot />
+  </button>
+)}

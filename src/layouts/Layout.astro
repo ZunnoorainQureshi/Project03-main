@@ -1,0 +1,85 @@
+---
+import '../styles/theme.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  showFooter?: boolean;
+  showNav?: boolean;
+}
+
+const {
+  title = 'PDF to Quiz — Free PDF to Quiz Generator | Convert PDFs to Quizzes Instantly',
+  description = 'Convert any PDF to a quiz with our free PDF to quiz generator. No signup, no upload — 100% client-side. Generate multiple-choice questions instantly with the best PDF to quiz converter.',
+  keywords = 'PDF to Quiz, pdf to quiz, pdf to quiz generator, pdf to quiz converter, magicform pdf to quiz, pdf to quiz maker, pdf to quiz free, free pdf to quiz generator, pdf to quiz ai, pdf to quiz generator free, convert pdf to quiz online',
+  ogImage = '/web-app-manager-512x512.png',
+  showFooter = true,
+  showNav = true,
+} = Astro.props;
+
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <link rel="shortcut icon" href="/favicon.ico?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="PDFtoQuiz" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://freepdftoquiz.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://freepdftoquiz.com" />
+    <meta property="og:site_name" content="PDF to Quiz" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="PDF to Quiz — Free PDF to Quiz Generator" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col transition-colors duration-200">
+    {showNav && <Nav />}
+    <main class="flex-1">
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+  </body>
+</html>

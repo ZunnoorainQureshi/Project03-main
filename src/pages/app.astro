@@ -1,0 +1,939 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Generator — Free PDF to Quiz"
+  description="Drop a PDF and instantly generate multiple-choice questions. 100% client-side, no signup, no file uploads."
+>
+  <div class="max-w-[820px] mx-auto px-md sm:px-lg py-3xl min-h-[70vh]">
+
+    <!-- ─── STATE: UPLOAD ─────────────────────────────────────────────── -->
+    <section id="state-upload">
+      <div class="text-center mb-2xl">
+        <h1 class="text-display-lg text-ink">Generate your quiz.</h1>
+        <p class="mt-md text-body-md text-body max-w-[500px] mx-auto">
+          Drop a PDF below and we'll turn it into multiple-choice questions
+          — entirely in your browser.
+        </p>
+      </div>
+
+      <div
+        id="drop-zone"
+        role="button"
+        tabindex="0"
+        aria-label="Upload a PDF file"
+        class="drop-zone relative flex flex-col items-center justify-center gap-md py-5xl px-lg rounded-lg border-2 border-dashed border-hairline-strong bg-canvas cursor-pointer transition-all duration-200 hover:border-ink hover:shadow-level-3"
+      >
+        <div class="drop-icon w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center transition-transform duration-300">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mute" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+        </div>
+        <div class="text-center">
+          <p class="text-body-md font-medium text-ink">
+            Drag and drop your PDF here
+          </p>
+          <p class="mt-xs text-body-sm text-mute">
+            or <span class="text-link underline cursor-pointer">browse files</span>
+          </p>
+        </div>
+      </div>
+
+      <input
+        type="file"
+        id="file-input"
+        accept=".pdf,application/pdf"
+        class="hidden"
+        aria-hidden="true"
+      />
+
+      <p class="mt-lg text-center text-caption font-mono text-mute">
+        Your file never leaves your browser. We mean it.
+      </p>
+    </section>
+
+    <!-- ─── STATE: CONFIGURE ──────────────────────────────────────────── -->
+    <section id="state-configure" class="hidden">
+      <div class="text-center mb-2xl">
+        <h1 class="text-display-lg text-ink">Configure your quiz.</h1>
+      </div>
+
+      <div class="bg-canvas rounded-lg p-lg shadow-level-4 border border-hairline">
+        <!-- File info row -->
+        <div class="flex items-center gap-md pb-lg mb-lg border-b border-hairline">
+          <div class="w-10 h-10 rounded-md bg-canvas-soft-2 flex items-center justify-center shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="text-body-sm font-medium text-ink truncate" id="file-name">
+              document.pdf
+            </p>
+            <p class="text-caption text-mute" id="file-size">0 KB</p>
+          </div>
+          <button
+            id="change-pdf-btn"
+            class="text-body-sm text-link hover:text-link-deep transition-colors shrink-0 cursor-pointer"
+          >
+            Change
+          </button>
+        </div>
+
+        <!-- Difficulty selector -->
+        <div class="mb-lg">
+          <p class="text-caption font-mono uppercase tracking-wide text-mute mb-sm">
+            Difficulty
+          </p>
+          <div class="flex gap-xs" id="difficulty-group" role="group" aria-label="Difficulty level">
+            <button
+              data-difficulty="easy"
+              aria-pressed="false"
+              class="diff-btn flex-1 h-10 rounded-md border border-hairline text-body-sm font-medium text-body transition-all duration-200 hover:bg-canvas-soft-2 cursor-pointer"
+            >
+              Easy
+            </button>
+            <button
+              data-difficulty="medium"
+              aria-pressed="true"
+              class="diff-btn active flex-1 h-10 rounded-md border border-hairline text-body-sm font-medium text-body transition-all duration-200 hover:bg-canvas-soft-2 cursor-pointer"
+            >
+              Medium
+            </button>
+            <button
+              data-difficulty="hard"
+              aria-pressed="false"
+              class="diff-btn flex-1 h-10 rounded-md border border-hairline text-body-sm font-medium text-body transition-all duration-200 hover:bg-canvas-soft-2 cursor-pointer"
+            >
+              Hard
+            </button>
+          </div>
+        </div>
+
+        <!-- Question count slider -->
+        <div class="mb-2xl">
+          <div class="flex items-center justify-between mb-sm">
+            <p class="text-caption font-mono uppercase tracking-wide text-mute">
+              Questions
+            </p>
+            <span class="text-body-sm font-mono font-medium text-ink" id="count-label">
+              20
+            </span>
+          </div>
+          <input
+            type="range"
+            id="count-slider"
+            min="5"
+            max="100"
+            value="20"
+            step="5"
+            class="range-slider w-full"
+            aria-label="Number of questions"
+          />
+          <div class="flex justify-between mt-xs text-caption text-mute font-mono">
+            <span>5</span>
+            <span>100</span>
+          </div>
+        </div>
+
+        <!-- Generate CTA -->
+        <button
+          id="generate-btn"
+          class="w-full inline-flex items-center justify-center gap-xs h-12 rounded-pill bg-ink text-on-primary font-medium hover:opacity-90 transition-opacity cursor-pointer"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          Generate Quiz
+        </button>
+      </div>
+    </section>
+
+    <!-- ─── STATE: PROCESSING ─────────────────────────────────────────── -->
+    <section id="state-processing" class="hidden">
+      <div class="flex flex-col items-center justify-center min-h-[40vh]">
+        <div class="text-center mb-2xl">
+          <div class="w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center mx-auto mb-lg processing-pulse">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 9h6M9 13h6M9 17h4" />
+            </svg>
+          </div>
+          <h2 class="text-display-md text-ink">Generating your quiz…</h2>
+          <p class="mt-sm text-body-md text-body" id="phase-label">Parsing PDF</p>
+        </div>
+
+        <div class="w-full max-w-[400px]">
+          <div class="bg-canvas-soft-2 rounded-full h-2 overflow-hidden">
+            <div
+              id="progress-fill"
+              class="progress-bar h-full rounded-full transition-all duration-500 ease-out"
+              style="width: 0%"
+              role="progressbar"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <p class="mt-md text-center text-caption font-mono text-mute" id="progress-percent">
+            0%
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── STATE: RESULTS ────────────────────────────────────────────── -->
+    <section id="state-results" class="hidden" style="padding-bottom: 80px;">
+      <!-- Header -->
+      <div class="mb-2xl">
+        <h1 class="text-display-lg text-ink">Your quiz is ready.</h1>
+        <p class="mt-sm text-body-md text-body">
+          <span id="results-count">0</span> questions ·
+          <span id="results-difficulty">Medium</span> difficulty
+        </p>
+      </div>
+
+      <!-- Export toolbar -->
+      <div class="flex flex-wrap items-center gap-xs mb-2xl p-xs bg-canvas rounded-lg border border-hairline shadow-level-2">
+        <button
+          id="export-pdf-btn"
+          class="export-btn inline-flex items-center gap-xs h-9 px-sm rounded-md border border-hairline text-body-sm font-medium text-ink hover:bg-canvas-soft-2 transition-colors cursor-pointer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          PDF
+        </button>
+        <button
+          id="copy-btn"
+          class="export-btn inline-flex items-center gap-xs h-9 px-sm rounded-md border border-hairline text-body-sm font-medium text-ink hover:bg-canvas-soft-2 transition-colors cursor-pointer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span id="copy-btn-text">Copy</span>
+        </button>
+        <div class="flex-1"></div>
+        <button
+          id="restart-btn"
+          class="inline-flex items-center gap-xs h-9 px-sm rounded-md text-body-sm font-medium text-mute hover:text-ink hover:bg-canvas-soft-2 transition-colors cursor-pointer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="1 4 1 10 7 10" />
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+          </svg>
+          Start over
+        </button>
+      </div>
+
+      <!-- Questions container (populated by JS) -->
+      <div id="questions-container" class="space-y-md"></div>
+    </section>
+
+    <!-- ─── STATE: ERROR ──────────────────────────────────────────────── -->
+    <section id="state-error" class="hidden">
+      <div class="flex flex-col items-center justify-center min-h-[40vh] text-center">
+        <div class="w-16 h-16 rounded-full bg-error-soft flex items-center justify-center mb-lg">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-error" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
+          </svg>
+        </div>
+        <h2 class="text-display-md text-ink">Something went wrong.</h2>
+        <p class="mt-md text-body-md text-body max-w-[500px]" id="error-message">
+          An unexpected error occurred.
+        </p>
+        <button
+          id="retry-btn"
+          class="mt-2xl inline-flex items-center h-12 px-lg rounded-pill bg-ink text-on-primary font-medium hover:opacity-90 transition-opacity cursor-pointer"
+        >
+          Try another PDF
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ─── SCORE BAR (fixed bottom) ────────────────────────────────── -->
+  <div
+    id="score-bar"
+    class="score-bar fixed bottom-0 left-0 right-0 z-40 border-t border-hairline backdrop-blur-lg"
+    style="transform: translateY(100%); background-color: rgba(255,255,255,0.92);"
+    aria-live="polite"
+  >
+    <div class="max-w-[820px] mx-auto px-md sm:px-lg h-14 flex items-center justify-between">
+      <div class="flex items-center gap-sm">
+        <span
+          id="score-status"
+          class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute transition-colors duration-300"
+        >
+          0
+        </span>
+        <div>
+          <p class="text-body-sm font-medium text-ink">
+            <span id="score-correct">0</span> of
+            <span id="score-total">0</span> correct
+          </p>
+          <p class="text-caption text-mute">
+            <span id="score-answered">0</span> answered
+          </p>
+        </div>
+      </div>
+      <span
+        id="score-percent"
+        class="text-display-sm font-mono text-ink"
+      >
+        —
+      </span>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  /* ── Drop Zone ──────────────────────────────────────────────────────── */
+  .drop-zone.drag-over {
+    border-color: var(--color-ink) !important;
+    background-color: var(--color-canvas-soft-2) !important;
+    box-shadow: var(--shadow-level-4);
+  }
+
+  .drop-zone.drag-over .drop-icon {
+    transform: scale(1.1) translateY(-4px);
+  }
+
+  /* ── Range Slider ───────────────────────────────────────────────────── */
+  .range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 9999px;
+    outline: none;
+    cursor: pointer;
+    background: var(--color-hairline);
+  }
+
+  .range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    cursor: pointer;
+    border: 3px solid var(--color-canvas);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    transition: transform 0.15s ease;
+  }
+  .range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .range-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    cursor: pointer;
+    border: 3px solid var(--color-canvas);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .range-slider::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: transparent;
+  }
+
+  /* ── Difficulty Toggle ──────────────────────────────────────────────── */
+  .diff-btn.active {
+    background-color: var(--color-ink) !important;
+    color: var(--color-on-primary) !important;
+    border-color: var(--color-ink) !important;
+  }
+
+  /* ── Progress Bar ───────────────────────────────────────────────────── */
+  .progress-bar {
+    background: linear-gradient(
+      90deg,
+      var(--color-cyan-deep) 0%,
+      var(--color-cyan) 50%,
+      var(--color-cyan-deep) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .processing-pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.95); }
+  }
+
+  /* ── Question Cards ─────────────────────────────────────────────────── */
+  .question-card {
+    animation: fadeSlideIn 0.35s ease-out both;
+    animation-delay: calc(var(--stagger) * 50ms);
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Option Buttons ─────────────────────────────────────────────────── */
+  .option-btn {
+    transition: all 0.2s ease;
+  }
+
+  .option-btn:not(.answered):hover {
+    background-color: var(--color-canvas-soft-2);
+    border-color: var(--color-hairline-strong);
+    transform: translateY(-1px);
+  }
+
+  .option-btn:not(.answered):active {
+    transform: translateY(0);
+  }
+
+  .option-btn.selected-correct {
+    background-color: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    color: #065f46 !important;
+  }
+
+  .option-btn.selected-wrong {
+    background-color: var(--color-error-soft) !important;
+    border-color: var(--color-error) !important;
+    color: var(--color-error-deep) !important;
+  }
+
+  .option-btn.is-correct {
+    background-color: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    color: #065f46 !important;
+  }
+
+  .option-btn.dimmed {
+    opacity: 0.45;
+  }
+
+  .option-btn.answered {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  /* ── Score Bar ───────────────────────────────────────────────────────── */
+  .score-bar {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .score-bar.visible {
+    transform: translateY(0) !important;
+  }
+
+  /* ── Cloze Blank Highlight ──────────────────────────────────────────── */
+  .cloze-blank {
+    display: inline;
+    padding: 2px 8px;
+    margin: 0 2px;
+    background-color: var(--color-canvas-soft-2);
+    color: var(--color-cyan-deep);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    border-radius: 4px;
+    border: 1px solid var(--color-hairline);
+  }
+
+  /* ── Feedback Reveal ────────────────────────────────────────────────── */
+  .feedback-reveal {
+    animation: feedbackIn 0.3s ease-out both;
+  }
+
+  @keyframes feedbackIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Toast ──────────────────────────────────────────────────────────── */
+  .toast-notify {
+    animation: toastIn 0.3s ease-out;
+  }
+
+  @keyframes toastIn {
+    from { opacity: 0; transform: translate(-50%, 12px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+</style>
+
+<script>
+  import { generateQuiz } from '../lib/generator';
+  import { downloadAs, copyAsMarkdown } from '../lib/export';
+  import type { Question, Difficulty, GenerationPhase } from '../lib/types';
+
+  // ── DOM References ──────────────────────────────────────────────────
+  const $ = (id: string) => document.getElementById(id)!;
+
+  const stateUpload = $('state-upload');
+  const stateConfigure = $('state-configure');
+  const stateProcessing = $('state-processing');
+  const stateResults = $('state-results');
+  const stateError = $('state-error');
+
+  const dropZone = $('drop-zone');
+  const fileInput = $('file-input') as HTMLInputElement;
+
+  const fileNameEl = $('file-name');
+  const fileSizeEl = $('file-size');
+  const changePdfBtn = $('change-pdf-btn');
+
+  const difficultyGroup = $('difficulty-group');
+  const countSlider = $('count-slider') as HTMLInputElement;
+  const countLabel = $('count-label');
+  const generateBtn = $('generate-btn');
+
+  const phaseLabel = $('phase-label');
+  const progressFill = $('progress-fill');
+  const progressPercent = $('progress-percent');
+
+  const resultsCountEl = $('results-count');
+  const resultsDifficultyEl = $('results-difficulty');
+  const questionsContainer = $('questions-container');
+
+  const exportPdfBtn = $('export-pdf-btn');
+  const copyBtn = $('copy-btn');
+  const copyBtnText = $('copy-btn-text');
+  const restartBtn = $('restart-btn');
+
+  const errorMessage = $('error-message');
+  const retryBtn = $('retry-btn');
+
+  const scoreBar = $('score-bar');
+  const scoreCorrectEl = $('score-correct');
+  const scoreTotalEl = $('score-total');
+  const scoreAnsweredEl = $('score-answered');
+  const scorePercentEl = $('score-percent');
+  const scoreStatusEl = $('score-status');
+
+  // ── Application State ───────────────────────────────────────────────
+  let selectedFile: File | null = null;
+  let difficulty: Difficulty = 'medium';
+  let questionCount = 20;
+  let questions: Question[] = [];
+  let answers = new Map<number, number>();
+  let correctCount = 0;
+
+  // ── Helpers ─────────────────────────────────────────────────────────
+  function escapeHtml(s: string): string {
+    const el = document.createElement('span');
+    el.textContent = s;
+    return el.innerHTML;
+  }
+
+  function formatSize(bytes: number): string {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
+
+  type AppState = 'upload' | 'configure' | 'processing' | 'results' | 'error';
+
+  function showState(state: AppState) {
+    const map: Record<AppState, HTMLElement> = {
+      upload: stateUpload,
+      configure: stateConfigure,
+      processing: stateProcessing,
+      results: stateResults,
+      error: stateError,
+    };
+    for (const [key, el] of Object.entries(map)) {
+      el.classList.toggle('hidden', key !== state);
+    }
+    if (state !== 'results') {
+      scoreBar.classList.remove('visible');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showToast(message: string) {
+    const toast = document.createElement('div');
+    toast.className =
+      'toast-notify fixed bottom-20 left-1/2 -translate-x-1/2 bg-ink text-on-primary text-body-sm px-md py-sm rounded-md shadow-level-5 z-50 pointer-events-none';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
+  }
+
+  // ── Progress Mapping ────────────────────────────────────────────────
+  const PHASE_LABELS: Record<GenerationPhase, string> = {
+    parsing: 'Parsing PDF…',
+    normalising: 'Analysing text…',
+    scoring: 'Scoring key terms…',
+    generating: 'Building questions…',
+    done: 'Done!',
+    error: 'Error',
+  };
+
+  const PHASE_RANGES: Record<GenerationPhase, [number, number]> = {
+    parsing: [0, 40],
+    normalising: [40, 50],
+    scoring: [50, 65],
+    generating: [65, 99],
+    done: [100, 100],
+    error: [0, 0],
+  };
+
+  function updateProgress(phase: GenerationPhase, ratio: number) {
+    const [start, end] = PHASE_RANGES[phase];
+    const pct = Math.round(start + (end - start) * Math.min(1, ratio));
+    progressFill.style.width = `${pct}%`;
+    progressFill.setAttribute('aria-valuenow', String(pct));
+    progressPercent.textContent = `${pct}%`;
+    phaseLabel.textContent = PHASE_LABELS[phase];
+  }
+
+  // ── File Handling ───────────────────────────────────────────────────
+  function handleFile(file: File) {
+    if (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf')) {
+      showToast('Please select a PDF file.');
+      return;
+    }
+    selectedFile = file;
+    fileNameEl.textContent = file.name;
+    fileSizeEl.textContent = formatSize(file.size);
+    showState('configure');
+  }
+
+  // Click to browse
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  // Keyboard support
+  dropZone.addEventListener('keydown', (e) => {
+    if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+
+  // File input change
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (file) handleFile(file);
+  });
+
+  // Drag events
+  let dragCounter = 0;
+
+  dropZone.addEventListener('dragenter', (e) => {
+    e.preventDefault();
+    dragCounter++;
+    dropZone.classList.add('drag-over');
+  });
+
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+
+  dropZone.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    dragCounter--;
+    if (dragCounter <= 0) {
+      dragCounter = 0;
+      dropZone.classList.remove('drag-over');
+    }
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dragCounter = 0;
+    dropZone.classList.remove('drag-over');
+    const file = (e as DragEvent).dataTransfer?.files?.[0];
+    if (file) handleFile(file);
+  });
+
+  // ── Configure: Difficulty ───────────────────────────────────────────
+  difficultyGroup.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest(
+      '[data-difficulty]'
+    ) as HTMLElement | null;
+    if (!btn) return;
+
+    difficulty = btn.dataset.difficulty as Difficulty;
+    difficultyGroup.querySelectorAll('.diff-btn').forEach((b) => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+  });
+
+  // ── Configure: Count Slider ─────────────────────────────────────────
+  function updateSliderFill() {
+    const min = parseInt(countSlider.min);
+    const max = parseInt(countSlider.max);
+    const pct = ((questionCount - min) / (max - min)) * 100;
+    countSlider.style.background = `linear-gradient(to right, var(--color-ink) 0%, var(--color-ink) ${pct}%, var(--color-hairline) ${pct}%, var(--color-hairline) 100%)`;
+  }
+
+  countSlider.addEventListener('input', () => {
+    questionCount = parseInt(countSlider.value, 10);
+    countLabel.textContent = String(questionCount);
+    updateSliderFill();
+  });
+  updateSliderFill();
+
+  // Change PDF
+  changePdfBtn.addEventListener('click', () => {
+    selectedFile = null;
+    fileInput.value = '';
+    showState('upload');
+  });
+
+  // ── Generate Quiz ───────────────────────────────────────────────────
+  generateBtn.addEventListener('click', async () => {
+    if (!selectedFile) return;
+
+    showState('processing');
+    updateProgress('parsing', 0);
+
+    try {
+      questions = await generateQuiz(selectedFile, {
+        difficulty,
+        count: questionCount,
+        onProgress: updateProgress,
+      });
+
+      if (questions.length === 0) {
+        throw new Error(
+          'Could not generate any questions from this PDF. The document may be too short or contain only non-textual content.'
+        );
+      }
+
+      // Reset scoring
+      answers.clear();
+      correctCount = 0;
+
+      // Update results header
+      resultsCountEl.textContent = String(questions.length);
+      resultsDifficultyEl.textContent =
+        difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+
+      // Render question cards
+      renderQuestions(questions);
+
+      // Reset score bar
+      scoreTotalEl.textContent = String(questions.length);
+      scoreCorrectEl.textContent = '0';
+      scoreAnsweredEl.textContent = '0';
+      scorePercentEl.textContent = '—';
+      scoreStatusEl.textContent = '0';
+      scoreStatusEl.className =
+        'inline-flex items-center justify-center w-8 h-8 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute transition-colors duration-300';
+
+      showState('results');
+    } catch (err: any) {
+      errorMessage.textContent =
+        err?.message || 'An unexpected error occurred while generating the quiz.';
+      showState('error');
+    }
+  });
+
+  // ── Render Questions ────────────────────────────────────────────────
+  function renderQuestions(qs: Question[]) {
+    questionsContainer.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+
+    qs.forEach((q, i) => {
+      const card = document.createElement('article');
+      card.className =
+        'question-card bg-canvas rounded-md p-lg shadow-level-3 border border-hairline';
+      card.style.setProperty('--stagger', String(Math.min(i, 20)));
+      card.dataset.questionId = String(q.id);
+      card.dataset.correctIndex = String(q.correctIndex);
+
+      const promptHtml = escapeHtml(q.prompt).replace(
+        /_____/g,
+        '<span class="cloze-blank">_____</span>'
+      );
+
+      card.innerHTML = `
+        <div class="flex items-start gap-sm mb-md">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute shrink-0">
+            ${String(q.id).padStart(2, '0')}
+          </span>
+          <p class="text-body-md text-ink" style="line-height:1.6">${promptHtml}</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-xs">
+          ${q.options
+            .map(
+              (opt, j) => `
+            <button
+              class="option-btn text-left p-sm rounded-md border border-hairline text-body-sm text-ink cursor-pointer"
+              data-index="${j}"
+              aria-label="Option ${letters[j]}: ${escapeHtml(opt)}"
+            >
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute mr-xs shrink-0" aria-hidden="true">${letters[j]}</span>
+              ${escapeHtml(opt)}
+            </button>
+          `
+            )
+            .join('')}
+        </div>
+        <div class="feedback hidden pt-md mt-md border-t border-hairline">
+          <p class="text-body-sm text-body">
+            <span class="font-medium text-ink">Explanation:</span> ${escapeHtml(q.explanation)}
+          </p>
+          <details class="mt-sm">
+            <summary class="text-caption text-mute cursor-pointer hover:text-body transition-colors select-none">
+              Show source sentence
+            </summary>
+            <p class="mt-xs text-caption text-mute" style="line-height:1.6">${escapeHtml(q.sourceSentence)}</p>
+          </details>
+        </div>
+      `;
+
+      questionsContainer.appendChild(card);
+    });
+  }
+
+  // ── Answer Handling (event delegation) ──────────────────────────────
+  questionsContainer.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest(
+      '.option-btn'
+    ) as HTMLElement | null;
+    if (!btn || btn.classList.contains('answered')) return;
+
+    const card = btn.closest('[data-question-id]') as HTMLElement;
+    if (!card) return;
+
+    const qId = parseInt(card.dataset.questionId!, 10);
+    const correctIdx = parseInt(card.dataset.correctIndex!, 10);
+    const selectedIdx = parseInt(btn.dataset.index!, 10);
+
+    // Prevent double-answering
+    if (answers.has(qId)) return;
+
+    // Record
+    answers.set(qId, selectedIdx);
+    const isCorrect = selectedIdx === correctIdx;
+    if (isCorrect) correctCount++;
+
+    // Visual feedback on all options
+    const allBtns = card.querySelectorAll('.option-btn');
+    allBtns.forEach((b) => {
+      b.classList.add('answered');
+      const idx = parseInt((b as HTMLElement).dataset.index!, 10);
+
+      if (idx === selectedIdx) {
+        b.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+      } else if (idx === correctIdx) {
+        b.classList.add('is-correct');
+      } else {
+        b.classList.add('dimmed');
+      }
+    });
+
+    // Reveal feedback
+    const feedback = card.querySelector('.feedback') as HTMLElement;
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      feedback.classList.add('feedback-reveal');
+    }
+
+    // Update running score
+    updateScore();
+  });
+
+  function updateScore() {
+    const total = questions.length;
+    const answered = answers.size;
+
+    scoreCorrectEl.textContent = String(correctCount);
+    scoreAnsweredEl.textContent = String(answered);
+    scoreTotalEl.textContent = String(total);
+
+    const pct =
+      answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
+    scorePercentEl.textContent = answered > 0 ? `${pct}%` : '—';
+
+    // Update the status badge
+    if (answered === total && total > 0) {
+      scoreStatusEl.textContent = '✓';
+      scoreStatusEl.className =
+        'inline-flex items-center justify-center w-8 h-8 rounded-full text-caption font-mono transition-colors duration-300';
+      if (pct >= 80) {
+        scoreStatusEl.classList.add('bg-cyan-soft', 'text-cyan-deep');
+      } else if (pct >= 50) {
+        scoreStatusEl.classList.add('bg-warning-soft', 'text-warning-deep');
+      } else {
+        scoreStatusEl.classList.add('bg-error-soft', 'text-error-deep');
+      }
+    } else {
+      scoreStatusEl.textContent = String(answered);
+    }
+
+    // Show score bar on first answer
+    if (answered > 0) {
+      scoreBar.classList.add('visible');
+    }
+  }
+
+  // ── Export Handlers ─────────────────────────────────────────────────
+  exportPdfBtn.addEventListener('click', () => {
+    if (questions.length === 0) return;
+    downloadAs(questions, 'pdf');
+    showToast('PDF file downloaded');
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    if (questions.length === 0) return;
+    const ok = await copyAsMarkdown(questions);
+    if (ok) {
+      copyBtnText.textContent = 'Copied!';
+      setTimeout(() => (copyBtnText.textContent = 'Copy'), 2000);
+    } else {
+      showToast('Could not copy to clipboard');
+    }
+  });
+
+  // ── Restart ─────────────────────────────────────────────────────────
+  function restart() {
+    selectedFile = null;
+    questions = [];
+    answers.clear();
+    correctCount = 0;
+    fileInput.value = '';
+    questionsContainer.innerHTML = '';
+    scoreBar.classList.remove('visible');
+
+    // Reset progress bar
+    progressFill.style.width = '0%';
+    progressPercent.textContent = '0%';
+
+    showState('upload');
+  }
+
+  restartBtn.addEventListener('click', restart);
+  retryBtn.addEventListener('click', restart);
+</script>
