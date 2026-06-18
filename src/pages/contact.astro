@@ -27,13 +27,25 @@ import Layout from '../layouts/Layout.astro';
           placeholder="Write your message here..."
           class="w-full rounded-md border border-hairline bg-canvas text-body-md text-ink p-sm focus:outline-none focus:border-ink transition-colors resize-y"
         ></textarea>
-        <a
-          href="mailto:zunnoorainqureshi@gmail.com"
-          class="mt-md inline-flex items-center gap-xs h-12 px-lg rounded-pill bg-ink text-on-primary font-medium hover:opacity-90 transition-opacity"
+        <button
+          id="send-btn"
+          class="mt-md inline-flex items-center gap-xs h-12 px-lg rounded-pill bg-ink text-on-primary font-medium hover:opacity-90 transition-opacity cursor-pointer"
         >
           Send message
-        </a>
+        </button>
       </div>
     </div>
   </div>
 </Layout>
+
+<script>
+  const sendBtn = document.getElementById('send-btn');
+  const messageEl = document.getElementById('message') as HTMLTextAreaElement | null;
+
+  sendBtn?.addEventListener('click', () => {
+    const body = messageEl?.value?.trim() || '';
+    const subject = 'Contact from Free PDF to Quiz';
+    const mailto = `mailto:zunnoorainqureshi@gmail.com?subject=${encodeURIComponent(subject)}${body ? '&body=' + encodeURIComponent(body) : ''}`;
+    window.location.href = mailto;
+  });
+</script>

@@ -93,4 +93,4 @@ export function buildDistractors(ctx: DistractorContext): string[] {
   return out.slice(0, 3);
 }
 
-export { sentenceLemmaSet, keytermSet };
+

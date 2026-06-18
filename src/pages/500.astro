@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="500 — Server Error — Free PDF to Quiz">
+  <div class="max-w-[820px] mx-auto px-md sm:px-lg py-3xl min-h-[70vh] flex items-center justify-center">
+    <div class="text-center">
+      <p class="text-display-xl text-ink font-bold">500</p>
+      <h1 class="text-display-lg text-ink mt-md">Something went wrong</h1>
+      <p class="mt-sm text-body-lg text-body max-w-[480px] mx-auto">
+        An unexpected error occurred. Please try again later.
+      </p>
+      <div class="mt-xl flex justify-center">
+        <Button href="/" variant="primary">Go home</Button>
+      </div>
+    </div>
+  </div>
+</Layout>

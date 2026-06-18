@@ -83,7 +83,7 @@ export function splitSentences(text: string): string[] {
     if (!s) continue;
 
     // Skip if the trailing "period" actually closes a known abbreviation.
-    const lastWord = s.split(/\s+/).slice(-2, -1)[0]?.toLowerCase().replace(/[.,]/g, '');
+    const lastWord = s.split(/\s+/).slice(-1)[0]?.toLowerCase().replace(/[.,]/g, '');
     if (lastWord && ABBREVIATIONS.has(lastWord) && !/[!?]$/.test(s)) continue;
 
     if (s.length < 8 || s.length > 320) continue;

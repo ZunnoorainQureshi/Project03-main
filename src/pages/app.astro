@@ -25,6 +25,14 @@ import Layout from '../layouts/Layout.astro';
         aria-label="Upload a PDF file"
         class="drop-zone relative flex flex-col items-center justify-center gap-md py-5xl px-lg rounded-lg border-2 border-dashed border-hairline-strong bg-canvas cursor-pointer transition-all duration-200 hover:border-ink hover:shadow-level-3"
       >
+        <input
+          type="file"
+          id="file-input"
+          accept=".pdf,application/pdf"
+          class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+          tabindex="-1"
+          aria-label="Upload a PDF file"
+        />
         <div class="drop-icon w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center transition-transform duration-300">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mute" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -41,14 +49,6 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
       </div>
-
-      <input
-        type="file"
-        id="file-input"
-        accept=".pdf,application/pdf"
-        class="hidden"
-        aria-hidden="true"
-      />
 
       <p class="mt-lg text-center text-caption font-mono text-mute">
         Your file never leaves your browser. We mean it.
@@ -613,9 +613,17 @@ import Layout from '../layouts/Layout.astro';
     phaseLabel.textContent = PHASE_LABELS[phase];
   }
 
+  // ── Prevent browser from opening dragged files ────────────────────
+  document.addEventListener('dragover', (e) => e.preventDefault());
+  document.addEventListener('drop', (e) => e.preventDefault());
+
   // ── File Handling ───────────────────────────────────────────────────
+  function isPdf(file: File): boolean {
+    return file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+  }
+
   function handleFile(file: File) {
-    if (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf')) {
+    if (!isPdf(file)) {
       showToast('Please select a PDF file.');
       return;
     }
@@ -625,10 +633,13 @@ import Layout from '../layouts/Layout.astro';
     showState('configure');
   }
 
-  // Click to browse
-  dropZone.addEventListener('click', () => fileInput.click());
+  // File input change — native click opens file picker
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (file) handleFile(file);
+  });
 
-  // Keyboard support
+  // Keyboard support — Enter/Space on the drop zone
   dropZone.addEventListener('keydown', (e) => {
     if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
       e.preventDefault();
@@ -636,41 +647,43 @@ import Layout from '../layouts/Layout.astro';
     }
   });
 
-  // File input change
-  fileInput.addEventListener('change', () => {
-    const file = fileInput.files?.[0];
-    if (file) handleFile(file);
-  });
-
-  // Drag events
+  // ── Drag events (on both drop-zone and file-input overlay) ────────
   let dragCounter = 0;
+  const dragTargets = [dropZone, fileInput];
 
-  dropZone.addEventListener('dragenter', (e) => {
+  function onDragEnter(e: Event) {
     e.preventDefault();
     dragCounter++;
     dropZone.classList.add('drag-over');
-  });
+  }
 
-  dropZone.addEventListener('dragover', (e) => {
+  function onDragOver(e: Event) {
     e.preventDefault();
-  });
+  }
 
-  dropZone.addEventListener('dragleave', (e) => {
+  function onDragLeave(e: Event) {
     e.preventDefault();
     dragCounter--;
     if (dragCounter <= 0) {
       dragCounter = 0;
       dropZone.classList.remove('drag-over');
     }
-  });
+  }
 
-  dropZone.addEventListener('drop', (e) => {
+  function onDrop(e: Event) {
     e.preventDefault();
     dragCounter = 0;
     dropZone.classList.remove('drag-over');
     const file = (e as DragEvent).dataTransfer?.files?.[0];
     if (file) handleFile(file);
-  });
+  }
+
+  for (const el of dragTargets) {
+    el.addEventListener('dragenter', onDragEnter);
+    el.addEventListener('dragover', onDragOver);
+    el.addEventListener('dragleave', onDragLeave);
+    el.addEventListener('drop', onDrop);
+  }
 
   // ── Configure: Difficulty ───────────────────────────────────────────
   difficultyGroup.addEventListener('click', (e) => {
