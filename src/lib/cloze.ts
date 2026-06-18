@@ -24,12 +24,26 @@ export interface ClozeChoice {
   position: number;
 }
 
-function findTermSpan(sentence: string, term: string): { start: number; end: number } | null {
-  // Case-insensitive search for the term, preferring whole-word matches.
-  const re = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+function findTermSpan(
+  sentence: string,
+  term: string
+): { start: number; end: number } | null {
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Avoid relying on `\b` because terms can include punctuation (e.g. "A/B", "e.g.").
+  // Ensure the match is not embedded inside a larger alphanumeric/"word-like" token.
+  const re = new RegExp(
+    `(^|[^A-Za-z0-9_])(${escaped})(?=([^A-Za-z0-9_]|$))`,
+    'i'
+  );
+
   const m = re.exec(sentence);
   if (!m) return null;
-  return { start: m.index, end: m.index + m[0].length };
+
+  // m[2] is the actual matched term.
+  const start = m.index + m[1].length;
+  const end = start + m[2].length;
+  return { start, end };
 }
 
 export function pickCloze(
@@ -84,19 +98,24 @@ export function pickCloze(
     return { c, score, position, span };
   });
 
-  const valid = scored.filter((s) => s.score > 0 && s.span);
+  // `span` is optional in the intermediate scored objects.
+  const valid = scored.filter((s): s is typeof s & { span: { start: number; end: number } } => {
+    return s.score > 0 && !!s.span;
+  });
+
   if (valid.length === 0) return null;
 
   // Easy: pick highest score deterministically; Medium: same; Hard: add
   // small jitter so the rare-term bias doesn't always pick the same one.
   valid.sort((a, b) => b.score - a.score);
-  const chosen = difficulty === 'hard' && valid.length > 1
-    ? valid[Math.floor(rng() * Math.min(3, valid.length))]
-    : valid[0];
+  const chosen =
+    difficulty === 'hard' && valid.length > 1
+      ? valid[Math.floor(rng() * Math.min(3, valid.length))]
+      : valid[0];
 
-  const { start, end } = (chosen as any).span as { start: number; end: number };
+  const { start, end } = chosen.span;
   const masked = sentence.slice(0, start) + '_____' + sentence.slice(end);
   return { term: chosen.c, masked, position: chosen.position };
 }
 
-export { ScoredTerm };
+export type { ScoredTerm };
