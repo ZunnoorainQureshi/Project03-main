@@ -1,20 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
   title="Generator — Free PDF to Quiz"
   description="Drop a PDF and instantly generate multiple-choice questions. 100% client-side, no signup, no file uploads."
 >
-  <div class="max-w-[820px] mx-auto px-md sm:px-lg py-3xl min-h-[70vh]">
-
+  <div
+    class="max-w-[820px] mx-auto px-md sm:px-lg py-3xl min-h-[70vh] pb-24 sm:pb-0"
+  >
     <!-- ─── STATE: UPLOAD ─────────────────────────────────────────────── -->
     <section id="state-upload">
       <div class="text-center mb-2xl">
         <h1 class="text-display-lg text-ink">Generate your quiz.</h1>
         <p class="mt-md text-body-md text-body max-w-[500px] mx-auto">
-          Drop a PDF below and we'll turn it into multiple-choice questions
-          — entirely in your browser.
+          Drop a PDF below and we'll turn it into multiple-choice questions —
+          entirely in your browser.
         </p>
       </div>
 
@@ -33,11 +34,24 @@ import Layout from '../layouts/Layout.astro';
           tabindex="-1"
           aria-label="Upload a PDF file"
         />
-        <div class="drop-icon w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center transition-transform duration-300">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mute" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
+        <div
+          class="drop-icon w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center transition-transform duration-300"
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-mute"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
           </svg>
         </div>
         <div class="text-center">
@@ -45,7 +59,9 @@ import Layout from '../layouts/Layout.astro';
             Drag and drop your PDF here
           </p>
           <p class="mt-xs text-body-sm text-mute">
-            or <span class="text-link underline cursor-pointer">browse files</span>
+            or <span class="text-link underline cursor-pointer"
+              >browse files</span
+            >
           </p>
         </div>
       </div>
@@ -61,19 +77,41 @@ import Layout from '../layouts/Layout.astro';
         <h1 class="text-display-lg text-ink">Configure your quiz.</h1>
       </div>
 
-      <div class="bg-canvas rounded-lg p-lg shadow-level-4 border border-hairline">
+      <div
+        class="bg-canvas rounded-lg p-lg shadow-level-4 border border-hairline"
+      >
         <!-- File info row -->
-        <div class="flex items-center gap-md pb-lg mb-lg border-b border-hairline">
-          <div class="w-10 h-10 rounded-md bg-canvas-soft-2 flex items-center justify-center shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
+        <div
+          class="flex items-center gap-md pb-lg mb-lg border-b border-hairline"
+        >
+          <div
+            class="w-10 h-10 rounded-md bg-canvas-soft-2 flex items-center justify-center shrink-0"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-ink"
+              aria-hidden="true"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              ></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
             </svg>
           </div>
           <div class="min-w-0 flex-1">
-            <p class="text-body-sm font-medium text-ink truncate" id="file-name">
+            <p
+              class="text-body-sm font-medium text-ink truncate"
+              id="file-name"
+            >
               document.pdf
             </p>
             <p class="text-caption text-mute" id="file-size">0 KB</p>
@@ -88,10 +126,17 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Difficulty selector -->
         <div class="mb-lg">
-          <p class="text-caption font-mono uppercase tracking-wide text-mute mb-sm">
+          <p
+            class="text-caption font-mono uppercase tracking-wide text-mute mb-sm"
+          >
             Difficulty
           </p>
-          <div class="flex gap-xs" id="difficulty-group" role="group" aria-label="Difficulty level">
+          <div
+            class="flex gap-xs"
+            id="difficulty-group"
+            role="group"
+            aria-label="Difficulty level"
+          >
             <button
               data-difficulty="easy"
               aria-pressed="false"
@@ -122,7 +167,10 @@ import Layout from '../layouts/Layout.astro';
             <p class="text-caption font-mono uppercase tracking-wide text-mute">
               Questions
             </p>
-            <span class="text-body-sm font-mono font-medium text-ink" id="count-label">
+            <span
+              class="text-body-sm font-mono font-medium text-ink"
+              id="count-label"
+            >
               20
             </span>
           </div>
@@ -136,7 +184,9 @@ import Layout from '../layouts/Layout.astro';
             class="range-slider w-full"
             aria-label="Number of questions"
           />
-          <div class="flex justify-between mt-xs text-caption text-mute font-mono">
+          <div
+            class="flex justify-between mt-xs text-caption text-mute font-mono"
+          >
             <span>5</span>
             <span>100</span>
           </div>
@@ -147,8 +197,18 @@ import Layout from '../layouts/Layout.astro';
           id="generate-btn"
           class="w-full inline-flex items-center justify-center gap-xs h-12 rounded-pill bg-ink text-on-primary font-medium hover:opacity-90 transition-opacity cursor-pointer"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polygon points="5 3 19 12 5 21 5 3" />
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
           Generate Quiz
         </button>
@@ -159,14 +219,29 @@ import Layout from '../layouts/Layout.astro';
     <section id="state-processing" class="hidden">
       <div class="flex flex-col items-center justify-center min-h-[40vh]">
         <div class="text-center mb-2xl">
-          <div class="w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center mx-auto mb-lg processing-pulse">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <path d="M9 9h6M9 13h6M9 17h4" />
+          <div
+            class="w-16 h-16 rounded-full bg-canvas-soft-2 flex items-center justify-center mx-auto mb-lg processing-pulse"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-ink"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <path d="M9 9h6M9 13h6M9 17h4"></path>
             </svg>
           </div>
           <h2 class="text-display-md text-ink">Generating your quiz…</h2>
-          <p class="mt-sm text-body-md text-body" id="phase-label">Parsing PDF</p>
+          <p class="mt-sm text-body-md text-body" id="phase-label">
+            Parsing PDF
+          </p>
         </div>
 
         <div class="w-full max-w-[400px]">
@@ -179,9 +254,13 @@ import Layout from '../layouts/Layout.astro';
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
-            ></div>
+            >
+            </div>
           </div>
-          <p class="mt-md text-center text-caption font-mono text-mute" id="progress-percent">
+          <p
+            class="mt-md text-center text-caption font-mono text-mute"
+            id="progress-percent"
+          >
             0%
           </p>
         </div>
@@ -189,7 +268,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- ─── STATE: RESULTS ────────────────────────────────────────────── -->
-    <section id="state-results" class="hidden" style="padding-bottom: 80px;">
+    <section id="state-results" class="hidden pb-24 sm:pb-0">
       <!-- Header -->
       <div class="mb-2xl">
         <h1 class="text-display-lg text-ink">Your quiz is ready.</h1>
@@ -200,15 +279,27 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <!-- Export toolbar -->
-      <div class="flex flex-wrap items-center gap-xs mb-2xl p-xs bg-canvas rounded-lg border border-hairline shadow-level-2">
+      <div
+        class="flex flex-wrap items-center gap-xs mb-2xl p-xs bg-canvas rounded-lg border border-hairline shadow-level-2"
+      >
         <button
           id="export-pdf-btn"
           class="export-btn inline-flex items-center gap-xs h-9 px-sm rounded-md border border-hairline text-body-sm font-medium text-ink hover:bg-canvas-soft-2 transition-colors cursor-pointer"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
           PDF
         </button>
@@ -216,9 +307,20 @@ import Layout from '../layouts/Layout.astro';
           id="copy-btn"
           class="export-btn inline-flex items-center gap-xs h-9 px-sm rounded-md border border-hairline text-body-sm font-medium text-ink hover:bg-canvas-soft-2 transition-colors cursor-pointer"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
           </svg>
           <span id="copy-btn-text">Copy</span>
         </button>
@@ -227,9 +329,19 @@ import Layout from '../layouts/Layout.astro';
           id="restart-btn"
           class="inline-flex items-center gap-xs h-9 px-sm rounded-md text-body-sm font-medium text-mute hover:text-ink hover:bg-canvas-soft-2 transition-colors cursor-pointer"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="1 4 1 10 7 10" />
-            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
           </svg>
           Start over
         </button>
@@ -241,16 +353,34 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- ─── STATE: ERROR ──────────────────────────────────────────────── -->
     <section id="state-error" class="hidden">
-      <div class="flex flex-col items-center justify-center min-h-[40vh] text-center">
-        <div class="w-16 h-16 rounded-full bg-error-soft flex items-center justify-center mb-lg">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-error" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="15" y1="9" x2="9" y2="15" />
-            <line x1="9" y1="9" x2="15" y2="15" />
+      <div
+        class="flex flex-col items-center justify-center min-h-[40vh] text-center"
+      >
+        <div
+          class="w-16 h-16 rounded-full bg-error-soft flex items-center justify-center mb-lg"
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-error"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
           </svg>
         </div>
         <h2 class="text-display-md text-ink">Something went wrong.</h2>
-        <p class="mt-md text-body-md text-body max-w-[500px]" id="error-message">
+        <p
+          class="mt-md text-body-md text-body max-w-[500px]"
+          id="error-message"
+        >
           An unexpected error occurred.
         </p>
         <button
@@ -261,7 +391,6 @@ import Layout from '../layouts/Layout.astro';
         </button>
       </div>
     </section>
-
   </div>
 
   <!-- ─── SCORE BAR (fixed bottom) ────────────────────────────────── -->
@@ -271,7 +400,9 @@ import Layout from '../layouts/Layout.astro';
     style="transform: translateY(100%); background-color: rgba(255,255,255,0.92);"
     aria-live="polite"
   >
-    <div class="max-w-[820px] mx-auto px-md sm:px-lg h-14 flex items-center justify-between">
+    <div
+      class="max-w-[820px] mx-auto px-md sm:px-lg h-14 flex items-center justify-between"
+    >
       <div class="flex items-center gap-sm">
         <span
           id="score-status"
@@ -289,10 +420,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
       </div>
-      <span
-        id="score-percent"
-        class="text-display-sm font-mono text-ink"
-      >
+      <span id="score-percent" class="text-display-sm font-mono text-ink">
         —
       </span>
     </div>
@@ -374,8 +502,12 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 
   .processing-pulse {
@@ -383,8 +515,15 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(0.95); }
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
   }
 
   /* ── Question Cards ─────────────────────────────────────────────────── */
@@ -394,8 +533,14 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Option Buttons ─────────────────────────────────────────────────── */
@@ -468,8 +613,14 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @keyframes feedbackIn {
-    from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Toast ──────────────────────────────────────────────────────────── */
@@ -478,63 +629,69 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @keyframes toastIn {
-    from { opacity: 0; transform: translate(-50%, 12px); }
-    to { opacity: 1; transform: translate(-50%, 0); }
+    from {
+      opacity: 0;
+      transform: translate(-50%, 12px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
   }
 </style>
 
 <script>
-  import { generateQuiz } from '../lib/generator';
-  import { downloadAs, copyAsMarkdown } from '../lib/export';
-  import type { Question, Difficulty, GenerationPhase } from '../lib/types';
+  import { generateQuiz } from "../lib/generator";
+  import { downloadAs, copyAsMarkdown } from "../lib/export";
+  import type { Question, Difficulty, GenerationPhase } from "../lib/types";
 
   // ── DOM References ──────────────────────────────────────────────────
   const $ = (id: string) => document.getElementById(id)!;
 
-  const stateUpload = $('state-upload');
-  const stateConfigure = $('state-configure');
-  const stateProcessing = $('state-processing');
-  const stateResults = $('state-results');
-  const stateError = $('state-error');
+  const stateUpload = $("state-upload");
+  const stateConfigure = $("state-configure");
+  const stateProcessing = $("state-processing");
+  const stateResults = $("state-results");
+  const stateError = $("state-error");
 
-  const dropZone = $('drop-zone');
-  const fileInput = $('file-input') as HTMLInputElement;
+  const dropZone = $("drop-zone");
+  const fileInput = $("file-input") as HTMLInputElement;
 
-  const fileNameEl = $('file-name');
-  const fileSizeEl = $('file-size');
-  const changePdfBtn = $('change-pdf-btn');
+  const fileNameEl = $("file-name");
+  const fileSizeEl = $("file-size");
+  const changePdfBtn = $("change-pdf-btn");
 
-  const difficultyGroup = $('difficulty-group');
-  const countSlider = $('count-slider') as HTMLInputElement;
-  const countLabel = $('count-label');
-  const generateBtn = $('generate-btn');
+  const difficultyGroup = $("difficulty-group");
+  const countSlider = $("count-slider") as HTMLInputElement;
+  const countLabel = $("count-label");
+  const generateBtn = $("generate-btn");
 
-  const phaseLabel = $('phase-label');
-  const progressFill = $('progress-fill');
-  const progressPercent = $('progress-percent');
+  const phaseLabel = $("phase-label");
+  const progressFill = $("progress-fill");
+  const progressPercent = $("progress-percent");
 
-  const resultsCountEl = $('results-count');
-  const resultsDifficultyEl = $('results-difficulty');
-  const questionsContainer = $('questions-container');
+  const resultsCountEl = $("results-count");
+  const resultsDifficultyEl = $("results-difficulty");
+  const questionsContainer = $("questions-container");
 
-  const exportPdfBtn = $('export-pdf-btn');
-  const copyBtn = $('copy-btn');
-  const copyBtnText = $('copy-btn-text');
-  const restartBtn = $('restart-btn');
+  const exportPdfBtn = $("export-pdf-btn");
+  const copyBtn = $("copy-btn");
+  const copyBtnText = $("copy-btn-text");
+  const restartBtn = $("restart-btn");
 
-  const errorMessage = $('error-message');
-  const retryBtn = $('retry-btn');
+  const errorMessage = $("error-message");
+  const retryBtn = $("retry-btn");
 
-  const scoreBar = $('score-bar');
-  const scoreCorrectEl = $('score-correct');
-  const scoreTotalEl = $('score-total');
-  const scoreAnsweredEl = $('score-answered');
-  const scorePercentEl = $('score-percent');
-  const scoreStatusEl = $('score-status');
+  const scoreBar = $("score-bar");
+  const scoreCorrectEl = $("score-correct");
+  const scoreTotalEl = $("score-total");
+  const scoreAnsweredEl = $("score-answered");
+  const scorePercentEl = $("score-percent");
+  const scoreStatusEl = $("score-status");
 
   // ── Application State ───────────────────────────────────────────────
   let selectedFile: File | null = null;
-  let difficulty: Difficulty = 'medium';
+  let difficulty: Difficulty = "medium";
   let questionCount = 20;
   let questions: Question[] = [];
   let answers = new Map<number, number>();
@@ -542,7 +699,7 @@ import Layout from '../layouts/Layout.astro';
 
   // ── Helpers ─────────────────────────────────────────────────────────
   function escapeHtml(s: string): string {
-    const el = document.createElement('span');
+    const el = document.createElement("span");
     el.textContent = s;
     return el.innerHTML;
   }
@@ -553,7 +710,7 @@ import Layout from '../layouts/Layout.astro';
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   }
 
-  type AppState = 'upload' | 'configure' | 'processing' | 'results' | 'error';
+  type AppState = "upload" | "configure" | "processing" | "results" | "error";
 
   function showState(state: AppState) {
     const map: Record<AppState, HTMLElement> = {
@@ -564,35 +721,35 @@ import Layout from '../layouts/Layout.astro';
       error: stateError,
     };
     for (const [key, el] of Object.entries(map)) {
-      el.classList.toggle('hidden', key !== state);
+      el.classList.toggle("hidden", key !== state);
     }
-    if (state !== 'results') {
-      scoreBar.classList.remove('visible');
+    if (state !== "results") {
+      scoreBar.classList.remove("visible");
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function showToast(message: string) {
-    const toast = document.createElement('div');
+    const toast = document.createElement("div");
     toast.className =
-      'toast-notify fixed bottom-20 left-1/2 -translate-x-1/2 bg-ink text-on-primary text-body-sm px-md py-sm rounded-md shadow-level-5 z-50 pointer-events-none';
+      "toast-notify fixed bottom-20 left-1/2 -translate-x-1/2 bg-ink text-on-primary text-body-sm px-md py-sm rounded-md shadow-level-5 z-50 pointer-events-none";
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transition = 'opacity 0.3s ease';
+      toast.style.opacity = "0";
+      toast.style.transition = "opacity 0.3s ease";
       setTimeout(() => toast.remove(), 300);
     }, 2000);
   }
 
   // ── Progress Mapping ────────────────────────────────────────────────
   const PHASE_LABELS: Record<GenerationPhase, string> = {
-    parsing: 'Parsing PDF…',
-    normalising: 'Analysing text…',
-    scoring: 'Scoring key terms…',
-    generating: 'Building questions…',
-    done: 'Done!',
-    error: 'Error',
+    parsing: "Parsing PDF…",
+    normalising: "Analysing text…",
+    scoring: "Scoring key terms…",
+    generating: "Building questions…",
+    done: "Done!",
+    error: "Error",
   };
 
   const PHASE_RANGES: Record<GenerationPhase, [number, number]> = {
@@ -608,40 +765,46 @@ import Layout from '../layouts/Layout.astro';
     const [start, end] = PHASE_RANGES[phase];
     const pct = Math.round(start + (end - start) * Math.min(1, ratio));
     progressFill.style.width = `${pct}%`;
-    progressFill.setAttribute('aria-valuenow', String(pct));
+    progressFill.setAttribute("aria-valuenow", String(pct));
     progressPercent.textContent = `${pct}%`;
     phaseLabel.textContent = PHASE_LABELS[phase];
   }
 
   // ── Prevent browser from opening dragged files ────────────────────
-  document.addEventListener('dragover', (e) => e.preventDefault());
-  document.addEventListener('drop', (e) => e.preventDefault());
+  document.addEventListener("dragover", (e) => e.preventDefault());
+  document.addEventListener("drop", (e) => e.preventDefault());
 
   // ── File Handling ───────────────────────────────────────────────────
   function isPdf(file: File): boolean {
-    return file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+    return (
+      file.type === "application/pdf" ||
+      file.name.toLowerCase().endsWith(".pdf")
+    );
   }
 
   function handleFile(file: File) {
     if (!isPdf(file)) {
-      showToast('Please select a PDF file.');
+      showToast("Please select a PDF file.");
       return;
     }
     selectedFile = file;
     fileNameEl.textContent = file.name;
     fileSizeEl.textContent = formatSize(file.size);
-    showState('configure');
+    showState("configure");
   }
 
   // File input change — native click opens file picker
-  fileInput.addEventListener('change', () => {
+  fileInput.addEventListener("change", () => {
     const file = fileInput.files?.[0];
     if (file) handleFile(file);
   });
 
   // Keyboard support — Enter/Space on the drop zone
-  dropZone.addEventListener('keydown', (e) => {
-    if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+  dropZone.addEventListener("keydown", (e) => {
+    if (
+      (e as KeyboardEvent).key === "Enter" ||
+      (e as KeyboardEvent).key === " "
+    ) {
       e.preventDefault();
       fileInput.click();
     }
@@ -654,7 +817,7 @@ import Layout from '../layouts/Layout.astro';
   function onDragEnter(e: Event) {
     e.preventDefault();
     dragCounter++;
-    dropZone.classList.add('drag-over');
+    dropZone.classList.add("drag-over");
   }
 
   function onDragOver(e: Event) {
@@ -666,39 +829,39 @@ import Layout from '../layouts/Layout.astro';
     dragCounter--;
     if (dragCounter <= 0) {
       dragCounter = 0;
-      dropZone.classList.remove('drag-over');
+      dropZone.classList.remove("drag-over");
     }
   }
 
   function onDrop(e: Event) {
     e.preventDefault();
     dragCounter = 0;
-    dropZone.classList.remove('drag-over');
+    dropZone.classList.remove("drag-over");
     const file = (e as DragEvent).dataTransfer?.files?.[0];
     if (file) handleFile(file);
   }
 
   for (const el of dragTargets) {
-    el.addEventListener('dragenter', onDragEnter);
-    el.addEventListener('dragover', onDragOver);
-    el.addEventListener('dragleave', onDragLeave);
-    el.addEventListener('drop', onDrop);
+    el.addEventListener("dragenter", onDragEnter);
+    el.addEventListener("dragover", onDragOver);
+    el.addEventListener("dragleave", onDragLeave);
+    el.addEventListener("drop", onDrop);
   }
 
   // ── Configure: Difficulty ───────────────────────────────────────────
-  difficultyGroup.addEventListener('click', (e) => {
+  difficultyGroup.addEventListener("click", (e) => {
     const btn = (e.target as HTMLElement).closest(
-      '[data-difficulty]'
+      "[data-difficulty]",
     ) as HTMLElement | null;
     if (!btn) return;
 
     difficulty = btn.dataset.difficulty as Difficulty;
-    difficultyGroup.querySelectorAll('.diff-btn').forEach((b) => {
-      b.classList.remove('active');
-      b.setAttribute('aria-pressed', 'false');
+    difficultyGroup.querySelectorAll(".diff-btn").forEach((b) => {
+      b.classList.remove("active");
+      b.setAttribute("aria-pressed", "false");
     });
-    btn.classList.add('active');
-    btn.setAttribute('aria-pressed', 'true');
+    btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
   });
 
   // ── Configure: Count Slider ─────────────────────────────────────────
@@ -709,7 +872,7 @@ import Layout from '../layouts/Layout.astro';
     countSlider.style.background = `linear-gradient(to right, var(--color-ink) 0%, var(--color-ink) ${pct}%, var(--color-hairline) ${pct}%, var(--color-hairline) 100%)`;
   }
 
-  countSlider.addEventListener('input', () => {
+  countSlider.addEventListener("input", () => {
     questionCount = parseInt(countSlider.value, 10);
     countLabel.textContent = String(questionCount);
     updateSliderFill();
@@ -717,18 +880,18 @@ import Layout from '../layouts/Layout.astro';
   updateSliderFill();
 
   // Change PDF
-  changePdfBtn.addEventListener('click', () => {
+  changePdfBtn.addEventListener("click", () => {
     selectedFile = null;
-    fileInput.value = '';
-    showState('upload');
+    fileInput.value = "";
+    showState("upload");
   });
 
   // ── Generate Quiz ───────────────────────────────────────────────────
-  generateBtn.addEventListener('click', async () => {
+  generateBtn.addEventListener("click", async () => {
     if (!selectedFile) return;
 
-    showState('processing');
-    updateProgress('parsing', 0);
+    showState("processing");
+    updateProgress("parsing", 0);
 
     try {
       questions = await generateQuiz(selectedFile, {
@@ -739,7 +902,7 @@ import Layout from '../layouts/Layout.astro';
 
       if (questions.length === 0) {
         throw new Error(
-          'Could not generate any questions from this PDF. The document may be too short or contain only non-textual content.'
+          "Could not generate any questions from this PDF. The document may be too short or contain only non-textual content.",
         );
       }
 
@@ -757,43 +920,44 @@ import Layout from '../layouts/Layout.astro';
 
       // Reset score bar
       scoreTotalEl.textContent = String(questions.length);
-      scoreCorrectEl.textContent = '0';
-      scoreAnsweredEl.textContent = '0';
-      scorePercentEl.textContent = '—';
-      scoreStatusEl.textContent = '0';
+      scoreCorrectEl.textContent = "0";
+      scoreAnsweredEl.textContent = "0";
+      scorePercentEl.textContent = "—";
+      scoreStatusEl.textContent = "0";
       scoreStatusEl.className =
-        'inline-flex items-center justify-center w-8 h-8 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute transition-colors duration-300';
+        "inline-flex items-center justify-center w-8 h-8 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute transition-colors duration-300";
 
-      showState('results');
+      showState("results");
     } catch (err: any) {
       errorMessage.textContent =
-        err?.message || 'An unexpected error occurred while generating the quiz.';
-      showState('error');
+        err?.message ||
+        "An unexpected error occurred while generating the quiz.";
+      showState("error");
     }
   });
 
   // ── Render Questions ────────────────────────────────────────────────
   function renderQuestions(qs: Question[]) {
-    questionsContainer.innerHTML = '';
-    const letters = ['A', 'B', 'C', 'D'];
+    questionsContainer.innerHTML = "";
+    const letters = ["A", "B", "C", "D"];
 
     qs.forEach((q, i) => {
-      const card = document.createElement('article');
+      const card = document.createElement("article");
       card.className =
-        'question-card bg-canvas rounded-md p-lg shadow-level-3 border border-hairline';
-      card.style.setProperty('--stagger', String(Math.min(i, 20)));
+        "question-card bg-canvas rounded-md p-lg shadow-level-3 border border-hairline";
+      card.style.setProperty("--stagger", String(Math.min(i, 20)));
       card.dataset.questionId = String(q.id);
       card.dataset.correctIndex = String(q.correctIndex);
 
       const promptHtml = escapeHtml(q.prompt).replace(
         /_____/g,
-        '<span class="cloze-blank">_____</span>'
+        '<span class="cloze-blank">_____</span>',
       );
 
       card.innerHTML = `
         <div class="flex items-start gap-sm mb-md">
           <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute shrink-0">
-            ${String(q.id).padStart(2, '0')}
+            ${String(q.id).padStart(2, "0")}
           </span>
           <p class="text-body-md text-ink" style="line-height:1.6">${promptHtml}</p>
         </div>
@@ -809,9 +973,9 @@ import Layout from '../layouts/Layout.astro';
               <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-canvas-soft-2 text-caption font-mono text-mute mr-xs shrink-0" aria-hidden="true">${letters[j]}</span>
               ${escapeHtml(opt)}
             </button>
-          `
+          `,
             )
-            .join('')}
+            .join("")}
         </div>
         <div class="feedback hidden pt-md mt-md border-t border-hairline">
           <p class="text-body-sm text-body">
@@ -831,13 +995,13 @@ import Layout from '../layouts/Layout.astro';
   }
 
   // ── Answer Handling (event delegation) ──────────────────────────────
-  questionsContainer.addEventListener('click', (e) => {
+  questionsContainer.addEventListener("click", (e) => {
     const btn = (e.target as HTMLElement).closest(
-      '.option-btn'
+      ".option-btn",
     ) as HTMLElement | null;
-    if (!btn || btn.classList.contains('answered')) return;
+    if (!btn || btn.classList.contains("answered")) return;
 
-    const card = btn.closest('[data-question-id]') as HTMLElement;
+    const card = btn.closest("[data-question-id]") as HTMLElement;
     if (!card) return;
 
     const qId = parseInt(card.dataset.questionId!, 10);
@@ -853,25 +1017,25 @@ import Layout from '../layouts/Layout.astro';
     if (isCorrect) correctCount++;
 
     // Visual feedback on all options
-    const allBtns = card.querySelectorAll('.option-btn');
+    const allBtns = card.querySelectorAll(".option-btn");
     allBtns.forEach((b) => {
-      b.classList.add('answered');
+      b.classList.add("answered");
       const idx = parseInt((b as HTMLElement).dataset.index!, 10);
 
       if (idx === selectedIdx) {
-        b.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+        b.classList.add(isCorrect ? "selected-correct" : "selected-wrong");
       } else if (idx === correctIdx) {
-        b.classList.add('is-correct');
+        b.classList.add("is-correct");
       } else {
-        b.classList.add('dimmed');
+        b.classList.add("dimmed");
       }
     });
 
     // Reveal feedback
-    const feedback = card.querySelector('.feedback') as HTMLElement;
+    const feedback = card.querySelector(".feedback") as HTMLElement;
     if (feedback) {
-      feedback.classList.remove('hidden');
-      feedback.classList.add('feedback-reveal');
+      feedback.classList.remove("hidden");
+      feedback.classList.add("feedback-reveal");
     }
 
     // Update running score
@@ -886,21 +1050,20 @@ import Layout from '../layouts/Layout.astro';
     scoreAnsweredEl.textContent = String(answered);
     scoreTotalEl.textContent = String(total);
 
-    const pct =
-      answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
-    scorePercentEl.textContent = answered > 0 ? `${pct}%` : '—';
+    const pct = answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
+    scorePercentEl.textContent = answered > 0 ? `${pct}%` : "—";
 
     // Update the status badge
     if (answered === total && total > 0) {
-      scoreStatusEl.textContent = '✓';
+      scoreStatusEl.textContent = "✓";
       scoreStatusEl.className =
-        'inline-flex items-center justify-center w-8 h-8 rounded-full text-caption font-mono transition-colors duration-300';
+        "inline-flex items-center justify-center w-8 h-8 rounded-full text-caption font-mono transition-colors duration-300";
       if (pct >= 80) {
-        scoreStatusEl.classList.add('bg-cyan-soft', 'text-cyan-deep');
+        scoreStatusEl.classList.add("bg-cyan-soft", "text-cyan-deep");
       } else if (pct >= 50) {
-        scoreStatusEl.classList.add('bg-warning-soft', 'text-warning-deep');
+        scoreStatusEl.classList.add("bg-warning-soft", "text-warning-deep");
       } else {
-        scoreStatusEl.classList.add('bg-error-soft', 'text-error-deep');
+        scoreStatusEl.classList.add("bg-error-soft", "text-error-deep");
       }
     } else {
       scoreStatusEl.textContent = String(answered);
@@ -908,25 +1071,25 @@ import Layout from '../layouts/Layout.astro';
 
     // Show score bar on first answer
     if (answered > 0) {
-      scoreBar.classList.add('visible');
+      scoreBar.classList.add("visible");
     }
   }
 
   // ── Export Handlers ─────────────────────────────────────────────────
-  exportPdfBtn.addEventListener('click', () => {
+  exportPdfBtn.addEventListener("click", () => {
     if (questions.length === 0) return;
-    downloadAs(questions, 'pdf');
-    showToast('PDF file downloaded');
+    downloadAs(questions, "pdf");
+    showToast("PDF file downloaded");
   });
 
-  copyBtn.addEventListener('click', async () => {
+  copyBtn.addEventListener("click", async () => {
     if (questions.length === 0) return;
     const ok = await copyAsMarkdown(questions);
     if (ok) {
-      copyBtnText.textContent = 'Copied!';
-      setTimeout(() => (copyBtnText.textContent = 'Copy'), 2000);
+      copyBtnText.textContent = "Copied!";
+      setTimeout(() => (copyBtnText.textContent = "Copy"), 2000);
     } else {
-      showToast('Could not copy to clipboard');
+      showToast("Could not copy to clipboard");
     }
   });
 
@@ -936,17 +1099,17 @@ import Layout from '../layouts/Layout.astro';
     questions = [];
     answers.clear();
     correctCount = 0;
-    fileInput.value = '';
-    questionsContainer.innerHTML = '';
-    scoreBar.classList.remove('visible');
+    fileInput.value = "";
+    questionsContainer.innerHTML = "";
+    scoreBar.classList.remove("visible");
 
     // Reset progress bar
-    progressFill.style.width = '0%';
-    progressPercent.textContent = '0%';
+    progressFill.style.width = "0%";
+    progressPercent.textContent = "0%";
 
-    showState('upload');
+    showState("upload");
   }
 
-  restartBtn.addEventListener('click', restart);
-  retryBtn.addEventListener('click', restart);
+  restartBtn.addEventListener("click", restart);
+  retryBtn.addEventListener("click", restart);
 </script>
