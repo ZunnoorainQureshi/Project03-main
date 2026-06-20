@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.4.4",
+    "astro": "^5.17.2",
     "compromise": "^14.15.1",
     "jspdf": "^4.2.1",
     "pdfjs-dist": "^4.10.38",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.103.0"
   }
 }
