@@ -17,9 +17,9 @@ const isApp = currentPath === '/app' || currentPath === '/app/';
     aria-label="Primary"
   >
     <!-- Logo wordmark -->
-    <a href="/" class="flex items-center gap-3 group" aria-label="Free PDF to Quiz — home">
-      <img src="/favicon.svg" alt="" class="w-8 h-8" aria-hidden="true" />
-      <span class="text-body-lg font-semibold tracking-tight text-ink group-hover:text-cyan-deep transition-colors">
+    <a href="/" class="flex items-center gap-3 group min-w-0" aria-label="Free PDF to Quiz — home">
+      <img src="/favicon.svg" alt="" class="w-8 h-8 shrink-0" aria-hidden="true" />
+      <span class="hidden xs:inline text-body-lg font-semibold tracking-tight text-ink group-hover:text-cyan-deep transition-colors whitespace-nowrap">
         Free PDF to Quiz
       </span>
     </a>
@@ -115,7 +115,7 @@ const isApp = currentPath === '/app' || currentPath === '/app/';
       </a>
       <a
         href="/app"
-        class={`inline-flex items-center h-8 px-sm text-body-sm-strong rounded-pill transition-all ${
+        class={`inline-flex items-center justify-center h-8 px-md text-body-sm-strong rounded-pill transition-all whitespace-nowrap shrink-0 ${
           isApp
             ? 'bg-canvas-soft-2 text-ink border border-hairline pointer-events-none'
             : 'bg-ink text-on-primary hover:opacity-90'

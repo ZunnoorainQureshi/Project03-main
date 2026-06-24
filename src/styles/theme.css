@@ -10,6 +10,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* ── Breakpoints ────────────────────────────────────────────────────── */
+  --breakpoint-xs: 480px;
+
   /* ── Brand & surface colors ────────────────────────────────────────── */
   --color-ink:             #171717;
   --color-on-primary:      #ffffff;

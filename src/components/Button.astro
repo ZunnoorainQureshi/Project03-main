@@ -31,8 +31,8 @@ const size = variant.endsWith('-sm') ? 'sm' : 'md';
 const tone = variant.startsWith('primary') ? 'primary' : 'secondary';
 
 const baseBySize = {
-  sm: 'inline-flex items-center h-7 px-xs text-button-md rounded-sm',
-  md: 'inline-flex items-center h-12 px-md text-button-lg rounded-pill',
+  sm: 'inline-flex items-center justify-center h-7 px-xs text-button-md rounded-sm',
+  md: 'inline-flex items-center justify-center h-12 px-lg text-button-lg rounded-pill',
 }[size];
 
 const toneByKind = {
