@@ -18,24 +18,24 @@ import PolarSection from '../components/PolarSection.astro';
       class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-canvas-soft pointer-events-none -z-10"
     ></div>
 
-    <div class="max-w-[1100px] mx-auto px-md sm:px-lg pt-6xl pb-5xl text-center">
+    <div class="max-w-[1100px] mx-auto px-md sm:px-lg pt-4xl sm:pt-6xl pb-3xl sm:pb-5xl text-center">
       <div class="flex justify-center mb-lg">
         <Badge>100% client-side · No signup</Badge>
       </div>
 
       <h1
-        class="text-display-xl sm:text-display-xl max-w-[920px] mx-auto text-ink"
+        class="text-display-lg sm:text-display-xl max-w-[920px] mx-auto text-ink"
       >
         Turn any PDF into a quiz. Free.
       </h1>
 
-      <p class="mt-lg max-w-[640px] mx-auto text-body-lg text-body">
+      <p class="mt-lg max-w-[640px] mx-auto text-body-md sm:text-body-lg text-body">
         Drop a PDF, pick a difficulty, and get 50+ multiple-choice questions in seconds. Download as PDF. No upload, no account, no tracking.
       </p>
 
-      <div class="mt-2xl flex flex-col sm:flex-row items-center justify-center gap-sm">
-        <Button href="/app" variant="primary">Start for free</Button>
-        <Button href="#how-it-works" variant="secondary">See how it works</Button>
+      <div class="mt-2xl flex flex-col sm:flex-row items-center justify-center gap-sm w-full sm:w-auto">
+        <Button href="/app" variant="primary" class="w-full sm:w-auto justify-center">Start for free</Button>
+        <Button href="#how-it-works" variant="secondary" class="w-full sm:w-auto justify-center">See how it works</Button>
       </div>
 
       <p class="mt-xl text-caption font-mono text-mute">
@@ -47,21 +47,27 @@ import PolarSection from '../components/PolarSection.astro';
   <!-- ─── TRUST STRIP (mono caption, not a "wall of love") ─────────────── -->
   <section class="bg-canvas-soft border-y border-hairline">
     <div class="max-w-[1400px] mx-auto px-md sm:px-lg py-xl">
-      <ul class="flex flex-wrap items-center justify-center gap-x-2xl gap-y-md text-caption font-mono text-mute">
+      <ul class="trust-strip flex flex-wrap items-center justify-center gap-x-lg gap-y-sm text-caption font-mono text-mute">
         <li>.PDF</li>
-        <li aria-hidden="true">·</li>
         <li>compromise NLP</li>
-        <li aria-hidden="true">·</li>
         <li>Tailwind v4</li>
-        <li aria-hidden="true">·</li>
         <li>Astro 6</li>
-        <li aria-hidden="true">·</li>
         <li>Zero backend</li>
-        <li aria-hidden="true">·</li>
         <li>Zero tracking</li>
       </ul>
     </div>
   </section>
+
+  <style>
+    /* Trust strip: CSS-only dot separators so wrapping on mobile never
+       leaves an orphaned · on its own line. Each item after the first
+       gets a "·" injected as a pseudo-element that is inline with the text. */
+    .trust-strip li + li::before {
+      content: '·';
+      margin-right: 0.75rem; /* = gap-lg / 2 */
+      opacity: 0.5;
+    }
+  </style>
 
   <!-- ─── FEATURES (3-up cluster) ──────────────────────────────────────── -->
   <PolarSection id="features" polarity="light" paddingY="xl">
@@ -471,8 +477,8 @@ import PolarSection from '../components/PolarSection.astro';
       <p class="mt-md text-body-lg text-body max-w-[600px] mx-auto">
         Pick a PDF, click start. That is the whole flow.
       </p>
-      <div class="mt-2xl flex flex-col sm:flex-row items-center justify-center gap-sm">
-        <Button href="/app" variant="primary">Start for free</Button>
+      <div class="mt-2xl flex flex-col items-center justify-center gap-sm px-md sm:px-0">
+        <Button href="/app" variant="primary" class="w-full max-w-xs sm:w-auto justify-center">Start for free</Button>
       </div>
     </div>
   </section>
