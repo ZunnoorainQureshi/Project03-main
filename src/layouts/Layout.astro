@@ -14,7 +14,7 @@ const {
   title = 'PDF to Quiz — Free PDF to Quiz Generator | Convert PDFs to Quizzes Instantly',
   description = 'Convert any PDF to a quiz with our free PDF to quiz generator. No signup, no upload — 100% client-side. Generate multiple-choice questions instantly with the best PDF to quiz converter.',
   keywords = 'PDF to Quiz, pdf to quiz, pdf to quiz generator, pdf to quiz converter, magicform pdf to quiz, pdf to quiz maker, pdf to quiz free, free pdf to quiz generator, pdf to quiz ai, pdf to quiz generator free, convert pdf to quiz online',
-  ogImage = '/web-app-manager-512x512.png',
+  ogImage = '/web-app-manifest-512x512.png',
   showFooter = true,
   showNav = true,
 } = Astro.props;
@@ -50,13 +50,13 @@ import Footer from '../components/Footer.astro';
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://freepdftoquiz.com" />
+    <link rel="canonical" href={`https://freepdftoquiz.com${Astro.url.pathname}`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://freepdftoquiz.com" />
+    <meta property="og:url" content={`https://freepdftoquiz.com${Astro.url.pathname}`} />
     <meta property="og:site_name" content="PDF to Quiz" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={ogImage} />

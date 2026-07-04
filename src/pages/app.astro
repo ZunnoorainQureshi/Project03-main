@@ -396,8 +396,8 @@ import Layout from "../layouts/Layout.astro";
   <!-- ─── SCORE BAR (fixed bottom) ────────────────────────────────── -->
   <div
     id="score-bar"
-    class="score-bar fixed bottom-0 left-0 right-0 z-40 border-t border-hairline backdrop-blur-lg"
-    style="transform: translateY(100%); background-color: rgba(255,255,255,0.92);"
+    class="score-bar fixed bottom-0 left-0 right-0 z-40 border-t border-hairline backdrop-blur-lg bg-canvas/92"
+    style="transform: translateY(100%);"
     aria-live="polite"
   >
     <div
@@ -574,6 +574,20 @@ import Layout from "../layouts/Layout.astro";
     background-color: #ecfdf5 !important;
     border-color: #10b981 !important;
     color: #065f46 !important;
+  }
+
+  /* Dark mode overrides for answer feedback */
+  :root.dark .option-btn.selected-correct,
+  :root.dark .option-btn.is-correct {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    border-color: #10b981 !important;
+    color: #6ee7b7 !important;
+  }
+
+  :root.dark .option-btn.selected-wrong {
+    background-color: rgba(238, 0, 0, 0.15) !important;
+    border-color: #ef4444 !important;
+    color: #fca5a5 !important;
   }
 
   .option-btn.dimmed {

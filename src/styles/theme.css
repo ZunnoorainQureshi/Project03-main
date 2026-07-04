@@ -176,6 +176,9 @@ body {
 ::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: #d4d4d4; }
 
+:root.dark ::-webkit-scrollbar-thumb { background: #333333; }
+:root.dark ::-webkit-scrollbar-thumb:hover { background: #444444; }
+
 /* Focus ring — uses brand ink for high contrast on both light and dark */
 :focus-visible {
   outline: 2px solid var(--color-ink);
